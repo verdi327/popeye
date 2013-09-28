@@ -1,0 +1,44 @@
+.custom-navbar{
+  width:100%;
+  background-color:rgb(101,67,211);
+  height:45px;
+}
+
+.custom-navbar-header{
+  padding-top:7px;
+  text-align:center;
+  margin-right:35px
+}
+
+.navbar-menu-icon{
+  float:left;
+  padding-top:7px;
+  padding-left:15px;
+}
+
+.navbar-title{
+  color:white;
+  font-size:20px;
+  text-align:center;
+}
+
+.icon-reorder.white{
+  color:white
+}
+
+.sidr {
+  /* Default Settings */
+  display: none;
+  position: absolute;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  z-index: 999999;
+  width: 260px;
+  overflow-x: none;
+  overflow-y: auto;
+}
+
+.list-group-item{
+  height:45px;
+}

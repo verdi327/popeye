@@ -1,0 +1,17 @@
+<%= form_for @workout do |f|  %>
+  <fieldset>
+    <div class="form-group">
+      <%= f.label "Workout Name" %>
+      <%= f.text_field :name, :class => "form-control", placeholder: "chest and back" %>
+    </div>
+  </fieldset>
+
+  <h3>
+    Exercises
+    <%= link_to_add_association "<span class='glyphicon glyphicon-plus'></span>".html_safe, f, :exercises, data: {:"association-insertion-method" => "after" }, class: "btn btn-success btn-sm", id: "add-exercise" %>
+  </h3>
+
+  <%= f.fields_for :exercises do |builder| %>
+    <%= render "exercise_fields", f: builder %>
+  <% end %>
+<% end %>

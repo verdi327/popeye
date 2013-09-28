@@ -1,0 +1,32 @@
+$table-cell-width: 2.42 !important;
+$color-warning: rgb(232,114,49);
+$color-primary: rgb(101,67,211);
+$color-light-grey: rgb(242,242,242);
+
+.panel{
+  margin-top:2%;
+}
+
+.panel-heading{
+  line-height: $table-cell-width;
+}
+
+.table tr td{
+  line-height: $table-cell-width;
+  span.right { float:right; }
+}
+
+#add-exercise{
+  float:right;
+}
+
+// new exercise workout form
+.badge{float:right}
+.nested-fields{
+  background-color:$color-light-grey;
+  padding:15px;
+}
+
+// end of exercise form
+
+

@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title">
+      <b><%= @workout.name %></b>
+      <span class="badge">42</span>
+    </h1>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table">
+      <tbody>
+        <% @workout.exercises.each do |exercise| %>
+        <tr>
+          <td>
+            <%= exercise.name %>
+            <span class="right">
+              <%= exercise.routine %>
+            </span>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%= link_to "<span class='glyphicon glyphicon-edit'></span> Edit".html_safe, edit_workout_path(@workout), class: "btn btn-danger btn-lg btn-block" %>
+
+
+
+
+

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Popeye</title>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<nav class="custom-navbar" role="navigation">
+  <div class="custom-navbar-header">
+    <span class="navbar-menu-icon"><a id="simple-menu" href="#sidr"><i class="icon-reorder white icon-large"></i></a></span>
+    <span class="navbar-title">Popeye</span>
+  </div>
+
+  <div id="sidr">
+    <ul class="list-group">
+      <li><%= link_to "Workout Library", workouts_path, class: "list-group-item" %></li>
+      <li><%= link_to "Create New Workout", new_workout_path, class: "list-group-item" %></li>
+      <li><a href="#" class="list-group-item">Workout Log</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<div class="container">
+  <%= yield %>
+</div>
+
+</body>
+</html>
