@@ -20,11 +20,19 @@ $color-light-grey: rgb(242,242,242);
   float:right;
 }
 
-// new exercise workout form
 .badge{float:right}
+
+// new exercise workout form
 .nested-fields{
   background-color:$color-light-grey;
   padding:15px;
+}
+
+.alert.alert-danger{
+  ul{
+    list-style-type: none;
+    margin-left: -39px;
+  }
 }
 
 // end of exercise form
