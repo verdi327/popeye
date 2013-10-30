@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130930015951) do
+ActiveRecord::Schema.define(version: 20131028222257) do
 
   create_table "exercises", force: true do |t|
     t.string   "name"
@@ -22,6 +22,9 @@ ActiveRecord::Schema.define(version: 20130930015951) do
     t.integer  "workout_id"
     t.integer  "initial_weight"
     t.integer  "current_weight"
+    t.string   "type"
+    t.integer  "increment_weight_by"
+    t.hstore   "data"
   end
 
   create_table "workouts", force: true do |t|

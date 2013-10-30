@@ -5,16 +5,16 @@
       <%= f.text_field :name, class: "form-control" %>
     </div>
     <div class="form-group">
-      <%= f.label :sets %>
-      <%= f.number_field :sets, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :reps %>
-      <%= f.number_field :reps, class: "form-control" %>
-    </div>
-    <div class="form-group">
       <%= f.label :initial_weight %>
       <%= f.number_field :initial_weight, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :increment_weight_by, "Upon successful completion, increment weight by how many lbs" %>
+      <%= f.number_field :increment_weight_by, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :type %>
+      <%= f.select :type, Exercise.types_for_select, {prompt: "please select an exercise type"}, class: "form-control exercise-type" %>
     </div>
   </fieldset>
   <%= link_to_remove_association "remove", f, class: "btn btn-danger btn-sm" %>

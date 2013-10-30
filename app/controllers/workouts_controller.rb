@@ -25,6 +25,7 @@ class WorkoutsController < ApplicationController
   end
 
   def create
+    raise params.inspect
     @workout = Workout.new(workout_params)
     if @workout.save
       redirect_to workouts_path
@@ -45,7 +46,7 @@ class WorkoutsController < ApplicationController
   end
 
   def workout_params
-    params.require(:workout).permit(:name, exercises_attributes: [:id, :name, :sets, :reps, :initial_weight, :_destroy])
+    params.require(:workout).permit(:name, exercises_attributes: [:id, :name, :sets, :reps, :initial_weight, :type, :increment_weight_by, :_destroy])
   end
 
 end

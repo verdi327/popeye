@@ -1,5 +1,10 @@
 Popeye::Application.routes.draw do
   resources :workouts
+  resources :exercises do
+    collection do
+      get "display_specific_attributes"
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

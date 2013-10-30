@@ -1,0 +1,2 @@
+class StaticRep < Exercise
+end

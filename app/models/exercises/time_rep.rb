@@ -1,0 +1,2 @@
+class TimeRep < Exercise
+end
