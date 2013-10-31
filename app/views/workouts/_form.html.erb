@@ -2,7 +2,7 @@
   <% if @workout.errors.any? %>
     <div class="alert alert-danger">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <strong>oh snap! found found some errors %></strong>
+      <strong>oh snap! found found some errors</strong>
       <ul>
       <% @workout.errors.messages.each do |attr, msg| %>
         <li><%= msg.first %></li>

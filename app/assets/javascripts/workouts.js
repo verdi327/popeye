@@ -21,8 +21,14 @@ $(document).ready(function() {
     formElement.addClass("has-error")
   }
 
+  // retrieve what exercise type was previously selected
+
   $("#new_workout").on("change", ".exercise-type", function(){
-    var element = $(this)
+    var element = $(this);
+    fetchExerciseType(element);
+  });
+
+  function fetchExerciseType(element){
     var nested_exercise_id = element.attr("id").match(/(\d+)/)[0]
     if(element.val() != ""){
       $.ajax({
@@ -35,7 +41,7 @@ $(document).ready(function() {
           addExerciseType( element.parent().parent(), html )
         });
       }
-  });
+  }
 
   function addExerciseType(parent, content) {
     if (parent.children().length == 4) {
