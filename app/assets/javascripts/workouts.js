@@ -21,7 +21,17 @@ $(document).ready(function() {
     formElement.addClass("has-error")
   }
 
-  // retrieve what exercise type was previously selected
+  // make select sticky so that on form errors, the proper ajax calls are made
+  var exercise_type_select_boxes = $("select");
+  var selected_values_exists = false
+  exercise_type_select_boxes.each(function(){
+    if( $(this).val() != "" ) {selected_values_exists = true}
+  });
+  if(selected_values_exists){
+    exercise_type_select_boxes.each(function(){
+      fetchExerciseType( $(this) );
+    });
+  }
 
   $("#new_workout").on("change", ".exercise-type", function(){
     var element = $(this);
