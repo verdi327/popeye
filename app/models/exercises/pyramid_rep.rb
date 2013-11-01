@@ -1,5 +1,48 @@
 class PyramidRep < Exercise
-  hstore_accessor :data, :direction, :starting_rep_number, :delta
-  validates :starting_rep_number, presence: {message: "need a starting rep number" }, numericality: { only_integer: true, greater_than: 0, message: "starting rep: only whole, positive numbers" }
-  validates :delta, presence: {message: "a change amount is needed" }, numericality: { only_integer: true, greater_than: 0, message: "change amount: only whole, positive numbers" }
+  hstore_accessor :data, :direction, :start_rep, :delta_rep, :delta_weight
+  validates :start_rep, presence: {message: "need a starting rep number" }, numericality: { only_integer: true, greater_than: 0, message: "starting rep: only whole, positive numbers" }
+  validates :delta_rep, presence: {message: "a rep change amount is needed" }, numericality: { only_integer: true, greater_than: 0, message: "rep change amount: only whole, positive numbers" }
+  validates :delta_weight, presence: {message: "a weight change amount is needed" }, numericality: { greater_than: 0, message: "weight change amount: only positive numbers" }
+
+  def routine
+    if ascending?
+      build_ascending_routine
+    elsif descending?
+      build_descending_routine
+    end
+  end
+
+  def ascending?
+    direction == "ascending"
+  end
+
+  def descending?
+    direction == "descending"
+  end
+
+  def start_routine
+    [[start_rep.to_i, current_weight.to_i]]
+  end
+
+  def build_ascending_routine
+    routine = start_routine
+    (sets-1).times do |num|
+      routine << [ (routine[num][0] + delta_rep.to_i), (routine[num][1] - delta_weight.to_i) ]
+    end
+    format_for_display(routine)
+  end
+
+  def build_descending_routine
+    routine = start_routine
+    (sets-1).times do |num|
+      routine << [ (routine[num][0] - delta_rep.to_i), (routine[num][1] + delta_weight.to_i) ]
+    end
+    format_for_display(routine)
+  end
+
+  def format_for_display(array)
+    array.map do |pair|
+      "#{pair[0]}@#{pair[1]}lbs"
+    end.join(" | ")
+  end
 end

@@ -49,8 +49,8 @@ class WorkoutsController < ApplicationController
       :name,
       exercises_attributes:
       [
-        :id, :name, :sets, :reps, :initial_weight, :type, :time,
-        :increment_weight_by, :delta, :direction, :starting_rep_number, :_destroy
+        :id, :name, :sets, :reps, :initial_weight, :type, :time, :increment_weight_by,
+        :delta_rep, :delta_weight, :direction, :start_rep, :_destroy
       ]
     )
   end

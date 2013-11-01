@@ -7,28 +7,44 @@ $(document).ready(function() {
     $('form').submit();
   });
 
-  $("form .form-group").each(function(){
-    if ( missingValue( $(this) ) ){
-      addErrorClass( $(this) );
-    }
-  });
+  function highlightErrors(){
+    $("form .form-group").each(function(){
+      if ( missingValue( $(this) ) ){
+        addErrorClass( $(this) );
+      }
+    });
+  }
 
+  if(errorsPresent()){highlightErrors()};
   function missingValue(formElement){
-    return formElement.children().filter(":input").val() == null
+    var field_value = formElement.children().filter(":input").val();
+    return field_value == null || field_value == ""
   }
 
   function addErrorClass(formElement){
     formElement.addClass("has-error")
   }
 
+  function errorsPresent(){
+    return $(".alert.alert-danger").length > 0
+  }
+
+
+  function exerciseTypeSelectBoxes(){
+    return $("select");
+  }
+
+  function selectedValuesExists(){
+    var exists = false
+    exerciseTypeSelectBoxes().each(function(){
+      if( $(this).val() != "" ) {exists = true}
+    });
+    return exists;
+  }
+
   // make select sticky so that on form errors, the proper ajax calls are made
-  var exercise_type_select_boxes = $("select");
-  var selected_values_exists = false
-  exercise_type_select_boxes.each(function(){
-    if( $(this).val() != "" ) {selected_values_exists = true}
-  });
-  if(selected_values_exists){
-    exercise_type_select_boxes.each(function(){
+  if(selectedValuesExists() && errorsPresent()){
+    exerciseTypeSelectBoxes().each(function(){
       fetchExerciseType( $(this) );
     });
   }
@@ -48,7 +64,8 @@ $(document).ready(function() {
         dataType: "html",
       })
         .done(function(html){
-          addExerciseType( element.parent().parent(), html )
+          addExerciseType( element.parent().parent(), html );
+          if(errorsPresent()){highlightErrors()};
         });
       }
   }
@@ -65,40 +82,60 @@ $(document).ready(function() {
   $("#new_workout").on("click", ".preview", function(){
     var id = $(this).data("id");
     var liftDetails = getLiftDetails(id);
-    var all_values_present = _.every(liftDetails, function(num) {return num != "" })
+    var all_values_present = _.every(_.values(liftDetails), function(num) {return num != "" })
 
     if(all_values_present){
-      liftDetails = _.map(liftDetails, function(num){return parseInt(num);});
       var result = previewRoutine(liftDetails);
-      $("span.ascending").html("(" + result.ascending.join("x") + ")");
-      $("span.descending").html("(" + result.descending.join("x") + ")");
+      $("span.ascending").html(result.ascending);
+      $("span.descending").html(result.descending);
     }
     else{
-      $("span.ascending").html("please fill in all of the above three fields");
-      $("span.descending").html("please fill in all of the above three fields");
+      $("span.ascending").html("please fill in the above four fields");
+      $("span.descending").html("please fill in the above four fields");
     }
     return false;
   });
 
   function getLiftDetails(id){
+    var keys = ["sets", "start_rep", "delta_rep", "delta_weight", "start_weight"]
     var values = [];
     $(".pyramid_" + id).each(function(){
       values.push($(this).val());
     });
-    return values;
+    // add the initial weight, which is not a pyramid specific trait so cannot get from above loop
+    values.push( $("#" + "workout_exercises_attributes_" + id + "_initial_weight").val() );
+    return createHash(keys, values);
+  }
+
+  function createHash(arr1, arr2) {
+    var hash = {};
+    var length = arr1.length;
+    _(length).times(function(num){
+      hash[arr1[num]] = arr2[num];
+    });
+    return hash;
   }
 
   function previewRoutine(lift_details){
-    var sets = lift_details[0];
-    var start_num = lift_details[1];
-    var delta = lift_details[2];
-    var descending = [start_num]
-    var ascending = [start_num]
+    var sets            = parseInt(lift_details.sets);
+    var start_rep       = parseInt(lift_details.start_rep);
+    var start_weight    = parseInt(lift_details.start_weight);
+    var delta_rep       = parseInt(lift_details.delta_rep);
+    var delta_weight    = parseInt(lift_details.delta_weight);
+    var descending      = [ [start_rep, start_weight] ];
+    var ascending       = [ [start_rep, start_weight] ];
     _(sets-1).times(function(num){
-      descending.push(descending[num] - delta);
-      ascending.push(ascending[num] + delta);
+      ascending.push([ (ascending[num][0] + delta_rep), (ascending[num][1] - delta_weight) ]);
+      descending.push([ (descending[num][0] - delta_rep), (descending[num][1] + delta_weight) ]);
     });
+    descending = prepareForPreview(descending);
+    ascending  = prepareForPreview(ascending);
     return {ascending: ascending, descending: descending}
+  }
+
+  function prepareForPreview(array){
+    var temp =  _.map(array, function(pair){return pair[0] + "@" + pair[1];} )
+    return ( "(" + temp.join(" | ") + ")" )
   }
 });
 
