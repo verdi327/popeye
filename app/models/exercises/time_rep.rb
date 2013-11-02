@@ -3,6 +3,6 @@ class TimeRep < Exercise
   validates :time, presence: {message: "time is required" }, numericality: { only_integer: true, greater_than: 0, message: "time: only whole, positive numbers" }
 
   def routine
-    "#{sets}x#{time} seconds of work"
+    "#{sets}x#{reps} in #{time} secs @ #{current_weight}lbs"
   end
 end
