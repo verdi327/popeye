@@ -33,8 +33,7 @@ class Exercise < ActiveRecord::Base
 
   def set_current_weight
     if current_weight.nil?
-      self.current_weight = initial_weight
-      save!
+      update_column :current_weight, initial_weight
     end
   end
 

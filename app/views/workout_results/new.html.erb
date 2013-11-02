@@ -1,0 +1,15 @@
+<div id="workout-results">
+  <% @exercises.each do |exercise| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4><b><%= exercise.name %></b><h4>
+        <p><%= exercise.routine %></p>
+      </div>
+      <p class="panel-body">
+        <% exercise.prescribed_lift.each do |set, reps| %>
+          <%= link_to "", "#rep-amount", class: "btn btn-default result-field", data:{reps: reps} %>
+        <% end %>
+      </p>
+    </div>
+  <% end %>
+</div>

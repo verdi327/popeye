@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131028222257) do
+ActiveRecord::Schema.define(version: 20131102024955) do
+
+  create_table "exercise_results", force: true do |t|
+    t.integer  "workout_result_id"
+    t.integer  "exercise_weight"
+    t.string   "exercise_name"
+    t.integer  "exercise_id"
+    t.boolean  "success"
+    t.hstore   "lift_details"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "exercise_results", ["exercise_id"], name: "index_exercise_results_on_exercise_id", using: :btree
+  add_index "exercise_results", ["workout_result_id"], name: "index_exercise_results_on_workout_result_id", using: :btree
 
   create_table "exercises", force: true do |t|
     t.string   "name"
@@ -26,6 +40,16 @@ ActiveRecord::Schema.define(version: 20131028222257) do
     t.integer  "increment_weight_by"
     t.hstore   "data"
   end
+
+  add_index "exercises", ["workout_id"], name: "index_exercises_on_workout_id", using: :btree
+
+  create_table "workout_results", force: true do |t|
+    t.integer  "workout_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "workout_results", ["workout_id"], name: "index_workout_results_on_workout_id", using: :btree
 
   create_table "workouts", force: true do |t|
     t.string   "name"

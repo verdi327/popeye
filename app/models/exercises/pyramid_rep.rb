@@ -6,9 +6,9 @@ class PyramidRep < Exercise
 
   def routine
     if ascending?
-      build_ascending_routine
+      format_for_display(build_ascending_routine)
     elsif descending?
-      build_descending_routine
+      format_for_display(build_descending_routine)
     end
   end
 
@@ -29,7 +29,7 @@ class PyramidRep < Exercise
     (sets-1).times do |num|
       routine << [ (routine[num][0] + delta_rep.to_i), (routine[num][1] - delta_weight.to_i) ]
     end
-    format_for_display(routine)
+    routine
   end
 
   def build_descending_routine
@@ -37,12 +37,38 @@ class PyramidRep < Exercise
     (sets-1).times do |num|
       routine << [ (routine[num][0] - delta_rep.to_i), (routine[num][1] + delta_weight.to_i) ]
     end
-    format_for_display(routine)
+    routine
   end
 
   def format_for_display(array)
     array.map do |pair|
       "#{pair[0]}@#{pair[1]}lbs"
     end.join(" | ")
+  end
+
+  def prescribed_lift
+    if ascending?
+      ascending_prescribed
+    elsif descending?
+      descending_prescribed
+    end
+  end
+
+  def ascending_prescribed
+    details = {}
+    build_ascending_routine.each_with_index do |set, i|
+      i += 1
+      details["set_#{i}"] = set[0]
+    end
+    details
+  end
+
+  def descending_prescribed
+    details = {}
+    build_descending_routine.each_with_index do |set, i|
+      i += 1
+      details["set_#{i}"] = set[0]
+    end
+    details
   end
 end
