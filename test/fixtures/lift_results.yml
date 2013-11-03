@@ -1,0 +1,20 @@
+# Read about fixtures at
+# http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  exercise_result_id: 
+  set: MyString
+  integer,: MyString
+  reps: 
+  intended_weight: 
+  used_weight: 
+  was_successful: false
+
+two:
+  exercise_result_id: 
+  set: MyString
+  integer,: MyString
+  reps: 
+  intended_weight: 
+  used_weight: 
+  was_successful: false

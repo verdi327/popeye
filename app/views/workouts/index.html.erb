@@ -18,7 +18,7 @@
           <td>
             <%= workout.name %>
             <span class="right">
-              <%= link_to "<span class='glyphicon icon-bolt'></span> Crush It".html_safe, new_workout_workout_result_path(workout), class: "btn btn-default btn-sm" %>
+              <%= link_to "<span class='glyphicon icon-bolt'></span> Crush It".html_safe, new_workout_result_path(workout_id: workout.id), class: "btn btn-default btn-sm" %>
               <%= link_to "View<span class='glyphicon glyphicon-chevron-right'></span>".html_safe, workout_path(workout), class: "btn btn-default btn-sm" %>
             </span>
           </td>
@@ -31,4 +31,4 @@
 
 <div class="form-action">
   <%= link_to "<span class='glyphicon glyphicon-flash'></span> Create Workout".html_safe, new_workout_path, class: "btn btn-default btn-lg btn-block" %>
-  </div>
+</div>

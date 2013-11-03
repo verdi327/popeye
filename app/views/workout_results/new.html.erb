@@ -1,15 +1,29 @@
-<div id="workout-results">
-  <% @exercises.each do |exercise| %>
+<%= form_for @workout_result do |workout_form| %>
+  <%= workout_form.hidden_field :workout_id, value: @workout_result.workout_id %>
+  <% @exercises.each_with_index do |exercise, e_index| %>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4><b><%= exercise.name %></b><h4>
         <p><%= exercise.routine %></p>
       </div>
-      <p class="panel-body">
-        <% exercise.prescribed_lift.each do |set, reps| %>
-          <%= link_to "", "#rep-amount", class: "btn btn-default result-field", data:{reps: reps} %>
+      <%= workout_form.fields_for :exercise_results do |exercise_result_form| %>
+        <%= exercise_result_form.hidden_field :exercise_id, value: exercise.id %>
+        <p class="panel-body">
+        <% exercise.prescribed_lift.each_with_index do |(set, reps), l_index| %>
+          <%= exercise_result_form.fields_for :lift_results do |lift_result_form| %>
+            <%= lift_result_form.hidden_field :set, value: set %>
+            <%= lift_result_form.hidden_field :reps, value: reps %>
+            <%= lift_result_form.hidden_field :intended_weight, value: exercise.current_weight %>
+            <%= lift_result_form.hidden_field :used_weight, value: exercise.current_weight %>
+          <% end %>
+          <%= link_to "", "#rep-amount", class: "btn btn-default result-field", data:{reps: reps, :"exercise-id" => e_index, :"lift-id" => l_index} %>
         <% end %>
-      </p>
+        </p>
+      <% end %>
     </div>
   <% end %>
+<% end %>
+
+<div class="form-action">
+  <%= link_to "<span class='glyphicon glyphicon-flash'></span> Record Workout".html_safe, "#", class: "btn btn-default btn-lg btn-block", id: "new-workout-result-submit" %>
 </div>

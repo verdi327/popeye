@@ -1,7 +1,6 @@
 Popeye::Application.routes.draw do
-  resources :workouts do
-    resources :workout_results
-  end
+  resources :workouts
+  resources :workout_results
   resources :exercises do
     collection do
       get "display_specific_attributes"
