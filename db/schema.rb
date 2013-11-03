@@ -11,13 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131102220238) do
+ActiveRecord::Schema.define(version: 20131103004358) do
 
   create_table "exercise_results", force: true do |t|
     t.integer  "workout_result_id"
     t.integer  "exercise_id"
     t.boolean  "was_successful"
-    t.hstore   "lift_details"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
