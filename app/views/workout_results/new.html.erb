@@ -1,3 +1,11 @@
+<div class="alert alert-success timer">
+  <button type="button" class="close">
+    <span class='glyphicon glyphicon-remove'></span>
+  </button>
+  <div class="message">Woot! Way to Get Your Reps In</div>
+  <div id="watch-display"></div>
+</div>
+
 <%= form_for @workout_result do |workout_form| %>
   <%= workout_form.hidden_field :workout_id, value: @workout_result.workout_id %>
   <% @exercises.each_with_index do |exercise, e_index| %>
