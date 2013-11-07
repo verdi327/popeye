@@ -2,6 +2,10 @@ class LiftResult < ActiveRecord::Base
   belongs_to :exercise_result
   after_save :determine_lift_success
 
+  def display_result
+    "#{set}: #{achieved_reps} @ #{used_weight}"
+  end
+
   private
 
   def determine_lift_success

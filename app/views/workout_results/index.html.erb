@@ -15,17 +15,19 @@
       <tbody>
         <% @workout_results.each do |result| %>
         <tr>
-          <td class="workout-result">
-            <div class="name-and-date">
-              <p><b><%= result.workout.name.titleize %></b></p>
-              <p class="date"><%= result.formatted_date %></p>
-            </div>
-            <div class="view-more-button">
-            <%= link_to "View<span class='glyphicon glyphicon-chevron-right'></span>".html_safe, "#", class: result.button_styling %>
+          <td>
+            <div class="workout-result-summary-data-index">
+              <div class="name-and-date">
+                <p><b><%= result.workout.name.titleize %></b></p>
+                <p class="date"><%= result.formatted_date %></p>
+              </div>
+              <div class="result-status-button">
+              <%= link_to "View<span class='glyphicon glyphicon-chevron-right'></span>".html_safe, workout_result_path(result), class: "btn #{result.button_styling}" %>
+              </div>
             </div>
           </td>
         </tr>
-        <% end%>
+        <% end %>
       </tbody>
     </table>
   </div>

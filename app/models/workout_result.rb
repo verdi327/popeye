@@ -13,6 +13,10 @@ class WorkoutResult < ActiveRecord::Base
   end
 
   def button_styling
-    success? ? "btn btn-success" : "btn btn-danger"
+    success? ? "btn-success" : "btn-danger"
+  end
+
+  def status
+    success? ? "Move On Up" : "Try Again"
   end
 end

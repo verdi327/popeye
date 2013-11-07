@@ -19,6 +19,10 @@ class WorkoutResultsController < ApplicationController
     end
   end
 
+  def show
+    @workout_result = WorkoutResult.find(params[:id])
+  end
+
   private
 
   def workout_result_params
