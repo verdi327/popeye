@@ -1,4 +1,5 @@
 Popeye::Application.routes.draw do
+  get "workout_log" => "workout_results#index", as: :workout_log
   resources :workouts
   resources :workout_results
   resources :exercises do

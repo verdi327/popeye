@@ -19,3 +19,18 @@
   }
 }
 
+// index page table
+.workout-result{
+  .name-and-date{
+    width:50%;
+    float:left;
+    .date{margin-top:-24px}
+  }
+  .view-more-button{
+    width:24%;
+    margin-right:5px;
+    margin-top:10px;
+    float:right;
+    .btn{width:100%}
+  }
+}

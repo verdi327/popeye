@@ -2,4 +2,9 @@ class WorkoutResult < ActiveRecord::Base
   belongs_to :workout
   has_many :exercise_results, dependent: :destroy
   accepts_nested_attributes_for :exercise_results, allow_destroy: true
+
+  def formatted_date
+    date = created_at
+    date.strftime("%a, %b #{date.day.ordinalize}")
+  end
 end

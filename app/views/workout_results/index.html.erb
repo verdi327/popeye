@@ -1,4 +1,32 @@
-<h1>Workout Log</h1>
-<% @workout_results.each do |workout_result| %>
-  <p><%= workout_result.workout.name %></p>
-<% end %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title"><b>Workout Log</b></h1>
+  </div>
+
+  <% if @workout_results.empty? %>
+  <div class="no-workouts">
+    <h4>Workout Log Empty?</h4>
+    <p>go bang out a workout, then you'll see the results here</p>
+  </div>
+  <% end %>
+
+  <div class="table-responsive">
+    <table class="table">
+      <tbody>
+        <% @workout_results.each do |result| %>
+        <tr>
+          <td class="workout-result">
+            <div class="name-and-date">
+              <p><b><%= result.workout.name.titleize %></b></p>
+              <p class="date"><%= result.formatted_date %></p>
+            </div>
+            <div class="view-more-button">
+            <%= link_to "View<span class='glyphicon glyphicon-chevron-right'></span>".html_safe, "#", class: "btn btn-default" %>
+            </div>
+          </td>
+        </tr>
+        <% end%>
+      </tbody>
+    </table>
+  </div>
+</div>
