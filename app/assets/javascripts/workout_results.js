@@ -76,7 +76,7 @@ $(document).ready(function() {
     var completedReps = element.text();
     var exerciseId = element.data("exercise-id");
     var liftId = element.data("lift-id");
-    $("#workout_result_exercise_results_attributes_" + exerciseId + "_lift_results_attributes_" + liftId + "_reps").val(completedReps);
+    $("#workout_result_exercise_results_attributes_" + exerciseId + "_lift_results_attributes_" + liftId + "_achieved_reps").val(completedReps);
   }
 
   function updateDisplay(watch){

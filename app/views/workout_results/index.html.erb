@@ -6,7 +6,7 @@
   <% if @workout_results.empty? %>
   <div class="no-workouts">
     <h4>Workout Log Empty?</h4>
-    <p>go bang out a workout, then you'll see the results here</p>
+    <p>gotta do work first, son!</p>
   </div>
   <% end %>
 
@@ -21,7 +21,7 @@
               <p class="date"><%= result.formatted_date %></p>
             </div>
             <div class="view-more-button">
-            <%= link_to "View<span class='glyphicon glyphicon-chevron-right'></span>".html_safe, "#", class: "btn btn-default" %>
+            <%= link_to "View<span class='glyphicon glyphicon-chevron-right'></span>".html_safe, "#", class: result.button_styling %>
             </div>
           </td>
         </tr>

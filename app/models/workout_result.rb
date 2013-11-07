@@ -7,4 +7,12 @@ class WorkoutResult < ActiveRecord::Base
     date = created_at
     date.strftime("%a, %b #{date.day.ordinalize}")
   end
+
+  def success?
+    exercise_results.all? {|exercise_result| exercise_result.success?}
+  end
+
+  def button_styling
+    success? ? "btn btn-success" : "btn btn-danger"
+  end
 end

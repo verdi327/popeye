@@ -20,7 +20,8 @@
         <% exercise.prescribed_lift.each_with_index do |(set, reps), l_index| %>
           <%= exercise_result_form.fields_for :lift_results do |lift_result_form| %>
             <%= lift_result_form.hidden_field :set, value: set %>
-            <%= lift_result_form.hidden_field :reps, value: reps %>
+            <%= lift_result_form.hidden_field :goal_reps, value: reps %>
+            <%= lift_result_form.hidden_field :achieved_reps, value: reps %>
             <%= lift_result_form.hidden_field :intended_weight, value: exercise.current_weight %>
             <%= lift_result_form.hidden_field :used_weight, value: exercise.current_weight %>
           <% end %>

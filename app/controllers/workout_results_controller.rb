@@ -31,7 +31,8 @@ class WorkoutResultsController < ApplicationController
         lift_results_attributes:
         [
           :set,
-          :reps,
+          :goal_reps,
+          :achieved_reps,
           :intended_weight,
           :used_weight
         ]

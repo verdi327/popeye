@@ -11,12 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131103004358) do
+ActiveRecord::Schema.define(version: 20131107040124) do
 
   create_table "exercise_results", force: true do |t|
     t.integer  "workout_result_id"
     t.integer  "exercise_id"
-    t.boolean  "was_successful"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -43,13 +42,16 @@ ActiveRecord::Schema.define(version: 20131103004358) do
   create_table "lift_results", force: true do |t|
     t.integer  "exercise_result_id"
     t.string   "set"
-    t.integer  "reps"
+    t.integer  "achieved_reps"
     t.integer  "intended_weight"
     t.integer  "used_weight"
     t.boolean  "was_successful"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "goal_reps"
   end
+
+  add_index "lift_results", ["exercise_result_id"], name: "index_lift_results_on_exercise_result_id", using: :btree
 
   create_table "workout_results", force: true do |t|
     t.integer  "workout_id"
