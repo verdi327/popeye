@@ -23,6 +23,12 @@ class WorkoutResultsController < ApplicationController
     @workout_result = WorkoutResult.find(params[:id])
   end
 
+  def destroy
+    @workout_result = WorkoutResult.find(params[:id])
+    @workout_result.destroy
+    redirect_to workout_log_path
+  end
+
   private
 
   def workout_result_params

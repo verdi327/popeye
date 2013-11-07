@@ -3,7 +3,7 @@ class LiftResult < ActiveRecord::Base
   after_save :determine_lift_success
 
   def display_result
-    "#{set}: #{achieved_reps} @ #{used_weight}"
+    "#{set}: #{achieved_reps} @ #{used_weight}lbs"
   end
 
   private

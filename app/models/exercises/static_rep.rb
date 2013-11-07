@@ -1,6 +1,6 @@
 class StaticRep < Exercise
-  def routine
-    "#{sets}x#{reps} @ #{current_weight}lbs"
+  def routine(weight=current_weight)
+    "#{sets}x#{reps} @ #{weight}lbs"
   end
 
   def prescribed_lift

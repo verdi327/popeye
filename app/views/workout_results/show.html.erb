@@ -13,14 +13,14 @@
     <div class="panel-heading">
       <%= exercise_result.exercise.name %>
       <span class="right">
-        <%= link_to exercise_result.status.html_safe, "#", class: "btn #{exercise_result.button_styling}" %>
+        <%= link_to exercise_result.status_icon.html_safe, "#", class: "btn #{exercise_result.button_styling}" %>
       </span>
     </div>
     <div class="panel-body">
-      <p>Prescribed Lift: 5x5 @ 200</p>
-      <p>Next Lift: 5x5 @ 205</p>
+      <p>Prescribed Lift: <%= exercise_result.prescribed_lift %></p>
+      <p class="next-lift">Next Lift: <%= exercise_result.next_lift %></p>
       <ul class="list-group">
-      <% exercise_result.lift_results.each do |lift_result| %>
+      <% exercise_result.lift_results.sort_by {|l| l.set }.each do |lift_result| %>
         <li class="list-group-item">
           <%= lift_result.display_result %>
         </li>
@@ -29,6 +29,14 @@
     </div>
   </div>
 <% end %>
+
+<div class="form-action">
+  <%= link_to "<span class='glyphicon glyphicon-edit'></span> Edit".html_safe, edit_workout_path(@workout_result), class: "btn btn-default btn-lg btn-block" %>
+</div>
+
+<div class="form-action">
+  <%= link_to "<span class='glyphicon glyphicon-remove'></span> Delete".html_safe, workout_result_path(@workout_result), method: "delete", class: "btn btn-danger btn-lg btn-block" %>
+</div>
 
 
 
