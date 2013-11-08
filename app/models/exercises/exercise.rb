@@ -1,12 +1,13 @@
 class Exercise < ActiveRecord::Base
   belongs_to :workout
+  has_many :lift_details, dependent: :destroy
   validates :name, presence: {message: "an exercise name is required" }
   validates :reps, presence: {message: "number of reps is required" }, numericality: { only_integer: true, greater_than: 0, message: "reps: only whole, positive numbers" }, unless: Proc.new {|exercise| exercise.pyramid_rep?}
   validates :sets, presence: {message: "number of sets is required" }, numericality: { only_integer: true, greater_than: 0, message: "sets: only whole, positive numbers" }
   validates :initial_weight, presence: {message: "initial weight required" }, numericality: { only_integer: true, greater_than_or_equal_to: 0, message: "initial weight: only whole, positive numbers" }
   validates :increment_weight_by, presence: {message: "a weight to increment is required" }, numericality: { greater_than_or_equal_to: 0, message: "increment weight: positive numbers" }
 
-  after_save :set_current_weight
+  after_create :set_current_weight
   store_accessor :data
 
   def static_rep?
