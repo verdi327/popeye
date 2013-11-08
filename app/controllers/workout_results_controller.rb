@@ -1,4 +1,6 @@
 class WorkoutResultsController < ApplicationController
+  before_action :find_workout_result, only: [:show, :edit, :update, :destroy]
+
   def index
     @workout_results = WorkoutResult.all
   end
@@ -20,11 +22,21 @@ class WorkoutResultsController < ApplicationController
   end
 
   def show
-    @workout_result = WorkoutResult.find(params[:id])
+  end
+
+  def edit
+    @exercises = @workout_result.workout.exercises
+  end
+
+  def update
+    if @workout_result.update(workout_result_params)
+      redirect_to workout_result_path(@workout_result)
+    else
+      render "edit"
+    end
   end
 
   def destroy
-    @workout_result = WorkoutResult.find(params[:id])
     @workout_result.destroy
     redirect_to workout_log_path
   end
@@ -48,6 +60,10 @@ class WorkoutResultsController < ApplicationController
         ]
       ]
     )
+  end
+
+  def find_workout_result
+    @workout_result ||= WorkoutResult.find(params[:id])
   end
 
 end

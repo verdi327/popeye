@@ -3,23 +3,33 @@ $(document).ready(function() {
     $('form#new_workout_result').submit();
   });
 
+  $('#update-workout-result-submit').click(function() {
+    $('form').submit();
+  });
+
   $(".timer").hide();
   var watch = new Stopwatch(updateDisplay, 50);
 
   $(".result-field").on("click", function(){
     decrementReps($(this));
     updateHiddenField($(this));
-    manageTimerDisplay($(this));
-    if(watchNotStarted()){
-      manageStopWatch("start", watch);
+    if (notEditingForm()){
+      manageTimerDisplay($(this));
+      if(watchNotStarted()){
+        manageStopWatch("start", watch);
+      }
+      else{manageStopWatch("restart", watch);}
     }
-    else{manageStopWatch("restart", watch);}
   });
 
   $(".container").on("click", ".close", function(){
     $(".timer").hide();
     manageStopWatch("reset", watch);
   });
+
+  function notEditingForm(){
+    return $(".edit").length == 0;
+  }
 
   function manageTimerDisplay(element){
     if(liftUnsuccessful(element)){
