@@ -29,7 +29,6 @@ $(document).ready(function() {
     return $(".alert.alert-danger").length > 0
   }
 
-
   function exerciseTypeSelectBoxes(){
     return $("select");
   }
@@ -43,13 +42,13 @@ $(document).ready(function() {
   }
 
   // make select sticky so that on form errors, the proper ajax calls are made
-  if(selectedValuesExists() && errorsPresent()){
+  if(selectedValuesExists()){
     exerciseTypeSelectBoxes().each(function(){
       fetchExerciseType( $(this) );
     });
   }
 
-  $("#new_workout").on("change", ".exercise-type", function(){
+  $(".container").on("change", ".exercise-type", function(){
     var element = $(this);
     fetchExerciseType(element);
   });
