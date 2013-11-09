@@ -7,7 +7,7 @@ class Exercise < ActiveRecord::Base
   validates :initial_weight, presence: {message: "initial weight required" }, numericality: { only_integer: true, greater_than_or_equal_to: 0, message: "initial weight: only whole, positive numbers" }
   validates :increment_weight_by, presence: {message: "a weight to increment is required" }, numericality: { greater_than_or_equal_to: 0, message: "increment weight: positive numbers" }
 
-  after_save :set_current_weight
+  after_create :set_current_weight
   store_accessor :data
 
   def static_rep?
@@ -31,6 +31,16 @@ class Exercise < ActiveRecord::Base
   end
 
   private
+
+  def calculate_current_weight
+    current_weight.nil? ? initial_weight : current_weight
+  end
+
+  def destroy_lift_details
+    if lift_details.present?
+      lift_details.each(&:destroy)
+    end
+  end
 
   def set_current_weight
     update_column :current_weight, initial_weight

@@ -15,10 +15,24 @@ $(document).ready(function() {
     });
   }
 
+  lockAllExercisesInitialWeight();
   if(errorsPresent()){highlightErrors()};
   function missingValue(formElement){
     var field_value = formElement.children().filter(":input").val();
     return field_value == null || field_value == ""
+  }
+
+  function lockAllExercisesInitialWeight(){
+    $(".initial-weight").each(function(){
+      var field = $(this);
+      if(initialWeightExist(field)){
+        field.attr("disabled", "disabled");
+      }
+    });
+  }
+
+  function initialWeightExist(element){
+    return element.val() != ""
   }
 
   function addErrorClass(formElement){

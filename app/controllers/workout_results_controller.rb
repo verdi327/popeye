@@ -52,6 +52,7 @@ class WorkoutResultsController < ApplicationController
         :exercise_id,
         lift_results_attributes:
         [
+          :id,
           :set,
           :goal_reps,
           :achieved_reps,
