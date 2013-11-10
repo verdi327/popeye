@@ -1,11 +1,11 @@
 $(document).ready(function() {
-  $('#new-workout-result-submit').click(function() {
-    $('form#new_workout_result').submit();
-  });
-
-  $('#update-workout-result-submit').click(function() {
+  $(".container").on("click", "#new-workout-result-submit", function(){
     $('form').submit();
-  });
+  })
+
+  $(".container").on("click", "#update-workout-result-submit", function(){
+    $("form").submit();
+  })
 
   $(".timer").hide();
   var watch = new Stopwatch(updateDisplay, 50);

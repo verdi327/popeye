@@ -5,7 +5,7 @@ class WorkoutResult < ActiveRecord::Base
 
   def formatted_date
     date = created_at
-    date.strftime("%a, %b #{date.day.ordinalize}")
+    date.strftime("%a, %b #{date.day.ordinalize} %Y")
   end
 
   def success?
@@ -18,5 +18,14 @@ class WorkoutResult < ActiveRecord::Base
 
   def status
     success? ? "Move On Up" : "Try Again"
+  end
+
+  def reset_to_previous!
+    if success?
+      workout.exercises.each do |exercise|
+        weight = exercise.current_weight - exercise.increment_weight_by
+        exercise.update_attribute(:current_weight, weight)
+      end
+    end
   end
 end

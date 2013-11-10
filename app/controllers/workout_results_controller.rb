@@ -1,5 +1,5 @@
 class WorkoutResultsController < ApplicationController
-  before_action :find_workout_result, only: [:show, :edit, :update, :destroy]
+  before_action :find_workout_result, only: [:show, :destroy]
 
   def index
     @workout_results = WorkoutResult.all
@@ -25,16 +25,22 @@ class WorkoutResultsController < ApplicationController
   end
 
   def edit
+    old_result = WorkoutResult.find(params[:id])
+    old_result.reset_to_previous!
+    @workout_result = WorkoutResult.new(workout_id: old_result.workout_id)
+    old_result.destroy
     @exercises = @workout_result.workout.exercises
+    exercise_results = @workout_result.exercise_results.build
+    exercise_results.lift_results.build
   end
 
-  def update
-    if @workout_result.update(workout_result_params)
-      redirect_to workout_result_path(@workout_result)
-    else
-      render "edit"
-    end
-  end
+  # def update
+  #   if @workout_result.update(workout_result_params)
+  #     redirect_to workout_result_path(@workout_result)
+  #   else
+  #     render "edit"
+  #   end
+  # end
 
   def destroy
     @workout_result.destroy

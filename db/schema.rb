@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20131108163318) do
 
   create_table "lift_results", force: true do |t|
     t.integer  "exercise_result_id"
-    t.string   "set"
+    t.integer  "set"
     t.integer  "achieved_reps"
     t.integer  "intended_weight"
     t.integer  "used_weight"
