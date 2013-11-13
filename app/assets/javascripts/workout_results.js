@@ -1,4 +1,22 @@
 $(document).ready(function() {
+
+  function initializeAudioApi(){
+    var audio = new Audio();
+    var context = new webkitAudioContext();
+    var analyser = context.createAnalyser();
+    var source = context.createMediaElementSource(audio);
+    var audioSource = 'http://localhost:3000/ding.mp3';
+    return {context: context, analyser: analyser, source: source, audio: audio, audioSource: audioSource};
+  }
+
+  function playAudio(){
+    api = initializeAudioApi();
+    api.source.connect(api.analyser);
+    api.analyser.connect(api.context.destination);
+    api.audio.src = api.audioSource;
+    api.audio.play();
+  }
+
   $(".container").on("click", "#new-workout-result-submit", function(){
     $('form').submit();
   })
@@ -91,6 +109,9 @@ $(document).ready(function() {
 
   function updateDisplay(watch){
     var time = watch.toString();
+    if(time == "01:30" || time == "03:00" || time == "05:00"){
+      playAudio();
+    }
     $("#watch-display").text(time);
   }
 
