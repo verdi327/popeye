@@ -14,6 +14,9 @@
 //= require jquery_ujs
 //= require jquery.sidr
 //= require cocoon
+//= require jquery.ui.draggable
+//= require jquery.ui.droppable
+//= require jquery.ui.sortable
 //= require_tree .
 
 

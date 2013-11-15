@@ -1,0 +1,16 @@
+@mixin box-shadow($shadows...){
+  -moz-box-shadow: $shadows;
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows
+}
+
+.new-program{float:left; width:47%}
+.all-workouts{float:right; width:47%}
+
+.workout.ui-draggable-dragging{
+  @include box-shadow(4px 4px 0px -1px #ccc);
+}
+
+.drop-area{
+  min-height:100px
+}

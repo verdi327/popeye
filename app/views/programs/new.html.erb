@@ -1,0 +1,26 @@
+<div class="panel panel-default new-program">
+  <div class="panel-heading">
+    <h1 class="panel-title">
+      <b>My Test Workout Program</b>
+    </h1>
+  </div>
+  <div class="panel-body drop-area">
+  </div>
+</div>
+
+<div class="panel panel-default all-workouts">
+  <div class="panel-heading">
+    <h1 class="panel-title">
+      <b>All Available Workouts</b>
+    </h1>
+  </div>
+  <div class="panel-body">
+    <ul class="list-group">
+    <% @workouts.each do |workout| %>
+      <li class="list-group-item workout">
+        <%= workout.name %>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+</div>
