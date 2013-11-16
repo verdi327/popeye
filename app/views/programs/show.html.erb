@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+  <div class="panel-heading workout-title">
+    <h1 class="panel-title">
+      <b><%= @program.name %></b>
+    </h1>
+  </div>
+  <div class="panel-body">
+    <ul id="workout-list" class="list-group">
+    <% @program.workouts.each do |workout| %>
+      <li class="list-group-item">
+        <%= workout.name %>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+</div>

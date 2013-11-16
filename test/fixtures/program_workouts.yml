@@ -1,0 +1,10 @@
+# Read about fixtures at
+# http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  program_id: 1
+  workout_id: 1
+
+two:
+  program_id: 1
+  workout_id: 1

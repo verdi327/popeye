@@ -1,16 +1,15 @@
-@mixin box-shadow($shadows...){
-  -moz-box-shadow: $shadows;
-  -webkit-box-shadow: $shadows;
-  box-shadow: $shadows
-}
-
-.new-program{float:left; width:47%}
+.new-program{float:left;width:47%;}
 .all-workouts{float:right; width:47%}
 
-.workout.ui-draggable-dragging{
-  @include box-shadow(4px 4px 0px -1px #ccc);
+#workout-list,
+#program-list{padding:10px}
+
+.placeholder{
+  border:1px dashed;
+  list-style-type:none;
+  height:75px
 }
 
-.drop-area{
-  min-height:100px
-}
+.workout-title{padding:20px}
+
+.new_program .alert{margin-top:20px}
