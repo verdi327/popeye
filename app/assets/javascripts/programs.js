@@ -45,4 +45,11 @@ $(document).ready(function() {
     }
   })
 
+  $(".program-exercise-list").hide();
+  $(".view-exercises").on("click", function(){
+    $(".program-exercise-list").slideToggle("slow");
+  })
+
+
+
 });

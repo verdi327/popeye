@@ -1,1 +1,33 @@
-<h1>Dog eats cat</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title"><b>All Programs</b></h1>
+  </div>
+
+  <% if @programs.empty? %>
+    <div class="no-programs">
+      <h4>No Programs?</h4>
+      <p>No biggy, make sure you have some workouts created first</p>
+      <p>Then create a program <%= link_to "here", new_program_path %></p>
+    </div>
+  <% end %>
+
+  <div class="table-responsive">
+    <table class="table">
+      <tbody>
+        <% @programs.each do |program| %>
+        <tr>
+          <td>
+            <%= program.name %>
+            <span class="right">
+              <% if program.active %>
+                <%= link_to "active", "#", class: "btn btn-sm btn-success" %>
+              <% end %>
+              <%= link_to "View<span class='glyphicon glyphicon-chevron-right'></span>".html_safe, program_path(program), class: "btn btn-default btn-sm" %>
+            </span>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

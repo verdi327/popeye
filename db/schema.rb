@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131116220431) do
+ActiveRecord::Schema.define(version: 20131123172513) do
 
   create_table "exercise_results", force: true do |t|
     t.integer  "workout_result_id"
@@ -73,6 +73,9 @@ ActiveRecord::Schema.define(version: 20131116220431) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "workout_order",   array: true
+    t.integer  "current_workout"
+    t.boolean  "active"
   end
 
   create_table "workout_results", force: true do |t|

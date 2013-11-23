@@ -1,7 +1,7 @@
 class TimeRep < Exercise
   hstore_accessor :data, :time
   validates :time, presence: {message: "time is required" }, numericality: { only_integer: true, greater_than: 0, message: "time: only whole, positive numbers" }
-  after_create :create_lift_detail
+  after_save :create_lift_details
 
   def routine(weight=current_weight)
     "#{sets}x#{reps} in #{time} secs @ #{weight}lbs"

@@ -3,7 +3,7 @@ class PyramidRep < Exercise
   validates :start_rep, presence: {message: "need a starting rep number" }, numericality: { only_integer: true, greater_than: 0, message: "starting rep: only whole, positive numbers" }
   validates :delta_rep, presence: {message: "a rep change amount is needed" }, numericality: { only_integer: true, greater_than: 0, message: "rep change amount: only whole, positive numbers" }
   validates :delta_weight, presence: {message: "a weight change amount is needed" }, numericality: { greater_than: 0, message: "weight change amount: only positive numbers" }
-  after_create :create_lift_details
+  after_save :create_lift_details
 
   def routine(weight=current_weight)
     if ascending?

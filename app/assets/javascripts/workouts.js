@@ -92,7 +92,7 @@ $(document).ready(function() {
     }
   }
 
-  $("#new_workout").on("click", ".preview", function(){
+  $(".container").on("click", ".preview", function(){
     var id = $(this).data("id");
     var liftDetails = getLiftDetails(id);
     var all_values_present = _.every(_.values(liftDetails), function(num) {return num != "" })
@@ -103,8 +103,8 @@ $(document).ready(function() {
       $("span.descending").html(result.descending);
     }
     else{
-      $("span.ascending").html("please fill in the above four fields");
-      $("span.descending").html("please fill in the above four fields");
+      $("span.ascending").html("please fill in the above fields");
+      $("span.descending").html("please fill in the above fields");
     }
     return false;
   });
