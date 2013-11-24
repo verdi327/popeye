@@ -11,25 +11,35 @@
 <body>
 <nav class="custom-navbar" role="navigation">
   <div class="custom-navbar-header">
-    <span class="navbar-menu-icon"><a id="simple-menu" href="#sidr"><i class="icon-reorder white icon-large"></i></a></span>
+    <% if current_user %>
+      <span class="navbar-menu-icon"><a id="simple-menu" href="#sidr"><i class="icon-reorder white icon-large"></i></a></span>
+    <% end %>
     <span class="navbar-title">Popeye</span>
   </div>
 
-  <div id="sidr">
-    <ul class="list-group">
-      <li><%= link_to "Workout Library", workouts_path, class: "list-group-item" %></li>
-      <li><%= link_to "Create New Workout", new_workout_path, class: "list-group-item" %></li>
-      <li><%= link_to "Program Library", programs_path, class: "list-group-item" %></li>
-      <li><%= link_to "Create New Program", new_program_path, class: "list-group-item" %></li>
-      <li><%= link_to "Workout Log", workout_log_path, class: "list-group-item" %></li>
-    </ul>
-  </div>
+  <% if current_user %>
+    <div id="sidr">
+      <ul class="list-group">
+        <li><%= link_to "Workout Library", workouts_path, class: "list-group-item" %></li>
+        <li><%= link_to "Create New Workout", new_workout_path, class: "list-group-item" %></li>
+        <li><%= link_to "Program Library", programs_path, class: "list-group-item" %></li>
+        <li><%= link_to "Create New Program", new_program_path, class: "list-group-item" %></li>
+        <li><%= link_to "Workout Log", workout_log_path, class: "list-group-item" %></li>
+        <li><%= link_to "Profile", user_path(current_user), class: "list-group-item" %></li>
+      </ul>
+    </div>
+  <% end %>
 </nav>
 
 <div class="container">
   <% flash.each do |name, msg| %>
-    <%= content_tag :div, msg, class: name %>
+    <% css_class = name == "flash" ? "success notice-custom" : "danger alert-custom" %>
+    <div class="alert alert-<%= css_class %>">
+      <button type='button' class='close' data-dismiss='alert'>×</button>
+      <%= msg %>
+    </div>
   <% end %>
+
 
   <%= yield %>
 </div>

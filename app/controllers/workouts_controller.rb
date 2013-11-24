@@ -29,6 +29,7 @@ class WorkoutsController < ApplicationController
   def create
     @workout = Workout.new(workout_params)
     if @workout.save
+      flash[:notice] = "Workout Created!"
       redirect_to workouts_path
     else
       render "new"
@@ -37,6 +38,7 @@ class WorkoutsController < ApplicationController
 
   def destroy
     @workout.destroy
+    flash[:notice] = "Workout Toasted"
     redirect_to workouts_path
   end
 
