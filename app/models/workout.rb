@@ -4,6 +4,7 @@ class Workout < ActiveRecord::Base
   has_many :workout_results
   has_many :program_workouts, dependent: :destroy
   has_many :programs, through: :program_workouts
+  belongs_to :user
   validates :name, presence: {message: "a workout name is required"}, length: {maximum: 30, message: "workout name too long"}
 
   def total_attempts

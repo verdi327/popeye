@@ -1,6 +1,7 @@
 class WorkoutResult < ActiveRecord::Base
   belongs_to :workout
   belongs_to :program
+  belongs_to :user
   has_many :exercise_results, dependent: :destroy
   accepts_nested_attributes_for :exercise_results, allow_destroy: true
   after_save :update_current_workout, if: Proc.new {|wr| wr.program.present?}

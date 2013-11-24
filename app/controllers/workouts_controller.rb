@@ -2,9 +2,9 @@ class WorkoutsController < ApplicationController
   before_action :find_workout, only: [:show, :edit, :update, :destroy]
 
   def index
-    @workouts = Workout.all
-    @active_program = Program.active
-    @current_workout = Workout.find_by_id(@active_program.current_workout) if @active_program
+    @workouts = current_user.workouts
+    @active_program = Program.active(current_user)
+    @current_workout = @workouts.where(id: @active_program.current_workout).first if @active_program
   end
 
   def new
@@ -51,6 +51,7 @@ class WorkoutsController < ApplicationController
   def workout_params
     params.require(:workout).permit(
       :name,
+      :user_id,
       exercises_attributes:
       [
         :id, :name, :sets, :reps, :initial_weight, :type, :time, :increment_weight_by,

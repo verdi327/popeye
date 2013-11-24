@@ -2,11 +2,11 @@ class WorkoutResultsController < ApplicationController
   before_action :find_workout_result, only: [:show, :destroy]
 
   def index
-    @workout_results = WorkoutResult.all
+    @workout_results = current_user.workout_results
   end
 
   def new
-    @workout_result = WorkoutResult.new(workout_id: params[:workout_id], program_id: params[:program_id] )
+    @workout_result = WorkoutResult.new(initial_params)
     @exercises = @workout_result.workout.exercises
     exercise_results = @workout_result.exercise_results.build
     exercise_results.lift_results.build
@@ -41,10 +41,15 @@ class WorkoutResultsController < ApplicationController
 
   private
 
+  def initial_params
+    { workout_id: params[:workout_id], program_id: params[:program_id] }
+  end
+
   def workout_result_params
     params.require(:workout_result).permit(
       :workout_id,
       :program_id,
+      :user_id,
       exercise_results_attributes:
       [
         :id,

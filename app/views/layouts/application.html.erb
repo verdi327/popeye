@@ -33,7 +33,7 @@
 
 <div class="container">
   <% flash.each do |name, msg| %>
-    <% css_class = name == "flash" ? "success notice-custom" : "danger alert-custom" %>
+    <% css_class = name == :notice ? "success notice-custom" : "danger alert-custom" %>
     <div class="alert alert-<%= css_class %>">
       <button type='button' class='close' data-dismiss='alert'>×</button>
       <%= msg %>
