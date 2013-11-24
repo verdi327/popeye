@@ -1,5 +1,6 @@
 <%= form_for @workout_result do |workout_form| %>
   <%= workout_form.hidden_field :workout_id, value: @workout_result.workout_id %>
+  <%= workout_form.hidden_field :program_id, value: @workout_result.program_id %>
   <% @exercises.each_with_index do |exercise, e_index| %>
     <div class="panel panel-default">
       <div class="panel-heading">

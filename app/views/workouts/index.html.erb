@@ -1,12 +1,25 @@
+<h2>Time To Crush</h2>
+<% if @active_program %>
+  <h3 class="active-program"><%= @active_program.name %>:</h3>
+  <%= link_to "#{@current_workout.name}<span class='glyphicon glyphicon-chevron-right cw-icon'></span>".html_safe, new_workout_result_path(workout_id: @current_workout.id, program_id: @active_program.id), class: "btn btn-default btn-lg btn-block current-workout" %>
+
+  <div class="or-divider">
+    Or, choose a workout
+  </div>
+<% end %>
+
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h1 class="panel-title"><b>All Workouts</b></h1>
+    <h1 class="panel-title"><b>Workout Library</b></h1>
   </div>
 
   <% if @workouts.empty? %>
   <div class="no-workouts">
     <h4>No Workouts?</h4>
     <p>no sweat, let's beat up on some weights</p>
+    <div class="form-action">
+      <%= link_to "<span class='glyphicon glyphicon-flash'></span> Create Workout".html_safe, new_workout_path, class: "btn btn-default btn-lg btn-block" %>
+    </div>
   </div>
   <% end %>
 
@@ -27,8 +40,4 @@
       </tbody>
     </table>
   </div>
-</div>
-
-<div class="form-action">
-  <%= link_to "<span class='glyphicon glyphicon-flash'></span> Create Workout".html_safe, new_workout_path, class: "btn btn-default btn-lg btn-block" %>
 </div>

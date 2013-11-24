@@ -1,4 +1,5 @@
 Popeye::Application.routes.draw do
+  root 'workouts#index'
   get "workout_log" => "workout_results#index", as: :workout_log
   resources :workouts
   resources :workout_results
@@ -16,7 +17,6 @@ Popeye::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

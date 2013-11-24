@@ -3,6 +3,8 @@ class WorkoutsController < ApplicationController
 
   def index
     @workouts = Workout.all
+    @active_program = Program.active
+    @current_workout = Workout.find_by_id(@active_program.current_workout) if @active_program
   end
 
   def new
