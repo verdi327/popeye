@@ -24,6 +24,6 @@
 $(document).ready(function() {
   $('#simple-menu').sidr();
 
-  $(".alert-custom").fadeOut(3000);
-  $(".notice-custom").fadeOut(3000);
+  // $(".alert-custom").fadeOut(6000);
+  // $(".notice-custom").fadeOut(6000);
 });
