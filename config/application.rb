@@ -14,6 +14,7 @@ Bundler.require(:default, Rails.env)
 module Popeye
   class Application < Rails::Application
     config.autoload_paths += %W(#{config.root}/app/models/exercises)
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
