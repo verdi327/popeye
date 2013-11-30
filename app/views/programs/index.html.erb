@@ -22,7 +22,7 @@
               <% if program.active %>
                 <%= link_to "active", "#", class: "btn btn-sm btn-success" %>
               <% end %>
-              <%= link_to "View<span class='glyphicon glyphicon-chevron-right'></span>".html_safe, program_path(program), class: "btn btn-default btn-sm" %>
+              <%= link_to "View", program_path(program), class: "btn btn-default btn-sm view" %>
             </span>
           </td>
         </tr>

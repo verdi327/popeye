@@ -21,7 +21,7 @@
 
   <h3>
     Exercises
-    <%= link_to_add_association "<span class='glyphicon glyphicon-plus'></span>".html_safe, f, :exercises, data: {:"association-insertion-method" => "after" }, class: "btn btn-success btn-sm", id: "add-exercise" %>
+    <%= link_to_add_association "<span class='icon-plus icon-large'></span>".html_safe, f, :exercises, data: {:"association-insertion-method" => "after" }, class: "btn btn-success btn-sm", id: "add-exercise" %>
   </h3>
 
   <%= f.fields_for :exercises do |builder| %>

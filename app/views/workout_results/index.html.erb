@@ -22,7 +22,7 @@
                 <p class="date"><%= result.formatted_date %></p>
               </div>
               <div class="result-status-button">
-              <%= link_to "View<span class='glyphicon glyphicon-chevron-right'></span>".html_safe, workout_result_path(result), class: "btn #{result.button_styling}" %>
+              <%= link_to "View", workout_result_path(result), class: "btn #{result.button_styling}" %>
               </div>
             </div>
           </td>
