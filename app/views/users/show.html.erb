@@ -20,7 +20,11 @@
           <td>
             Current Program:
             <span class="right">
-              <%= @active_program.name %>
+              <% if @active_program.nil? %>
+                No program
+              <% else %>
+                <%= @active_program.name %>
+              <% end %>
             </span>
           </td>
         </tr>
