@@ -14,7 +14,9 @@ gem 'jquery-ui-rails'
 gem "cocoon"
 gem 'rails_12factor', group: :production
 
+#General Use
 gem "faraday"
+gem "kaminari"
 
 
 # Use Uglifier as compressor for JavaScript assets

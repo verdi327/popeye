@@ -2,7 +2,7 @@ class WorkoutResultsController < ApplicationController
   before_action :find_workout_result, only: [:show, :destroy]
 
   def index
-    @workout_results = current_user.workout_results
+    @workout_results = current_user.workout_results.order("created_at DESC").page params[:page]
   end
 
   def new
