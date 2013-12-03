@@ -6,21 +6,8 @@ class WorkoutResult < ActiveRecord::Base
   accepts_nested_attributes_for :exercise_results, allow_destroy: true
   after_save :update_current_workout, if: Proc.new {|wr| wr.program.present?}
 
-  def formatted_date
-    date = created_at
-    date.strftime("%a, %b #{date.day.ordinalize} %Y")
-  end
-
   def success?
     exercise_results.all? {|exercise_result| exercise_result.success?}
-  end
-
-  def button_styling
-    success? ? "btn-success" : "btn-danger"
-  end
-
-  def status
-    success? ? "Move On Up" : "Try Again"
   end
 
   def reset_to_previous!

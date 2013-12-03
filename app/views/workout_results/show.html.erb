@@ -1,10 +1,10 @@
 <div class="workout-result-summary-data-show">
   <div class="name-and-date">
     <p><b><%= @workout_result.workout.name.titleize %></b></p>
-    <p class="date"><%= @workout_result.formatted_date %></p>
+    <p class="date"><%= formatted_date(@workout_result) %></p>
   </div>
   <div class="result-status-button">
-    <%= link_to @workout_result.status, "#", class: "btn #{@workout_result.button_styling}" %>
+    <%= link_to status(@workout_result), "#", class: "btn #{button_styling(@workout_result)}" %>
   </div>
 </div>
 
@@ -13,7 +13,7 @@
     <div class="panel-heading">
       <%= exercise_result.exercise.name %>
       <span class="right">
-        <%= link_to exercise_result.status_icon.html_safe, "#", class: "btn #{exercise_result.button_styling}" %>
+        <%= link_to status_icon(exercise_result).html_safe, "#", class: "btn #{button_styling(exercise_result)}" %>
       </span>
     </div>
     <div class="panel-body">

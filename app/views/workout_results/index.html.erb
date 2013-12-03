@@ -19,10 +19,10 @@
             <div class="workout-result-summary-data-index">
               <div class="name-and-date">
                 <p><b><%= result.workout.name.titleize %></b></p>
-                <p class="date"><%= result.formatted_date %></p>
+                <p class="date"><%= formatted_date(result) %></p>
               </div>
               <div class="result-status-button">
-              <%= link_to "View", workout_result_path(result), class: "btn #{result.button_styling}" %>
+              <%= link_to "View", workout_result_path(result), class: "btn #{button_styling(result)}" %>
               </div>
             </div>
           </td>
