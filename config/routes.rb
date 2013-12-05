@@ -3,7 +3,11 @@ Popeye::Application.routes.draw do
   resources :users, only: [:show]
   root 'workouts#index'
   get "workout_log" => "workout_results#index", as: :workout_log
-  resources :workouts
+  resources :workouts do
+    member do
+      get "confirm_delete"
+    end
+  end
   resources :workout_results
   resources :exercises do
     collection do

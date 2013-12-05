@@ -1,5 +1,5 @@
 class WorkoutsController < ApplicationController
-  before_action :find_workout, only: [:show, :edit, :update, :destroy]
+  before_action :find_workout, only: [:show, :edit, :update, :destroy, :confirm_delete]
 
   def index
     @workouts = current_user.workouts
@@ -36,6 +36,9 @@ class WorkoutsController < ApplicationController
     end
   end
 
+  def confirm_delete
+  end
+
   def destroy
     @workout.destroy
     flash[:notice] = "Workout Toasted"
@@ -59,5 +62,10 @@ class WorkoutsController < ApplicationController
       ]
     )
   end
+
+  def workout_used_in_programs?
+    @workout.programs.present?
+  end
+  helper_method :workout_used_in_programs?
 
 end

@@ -1,0 +1,27 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title">
+      <b>Delete <%= @workout.name.titleize %>?</b>
+    </h1>
+  </div>
+
+  <div class="panel-body">
+    <p class="info-text">
+      Because this workout is needed in the below program(s), deleting it will result
+      in the removal of the workout from ALL of the below programs.
+    </p>
+    <ul class="list-group">
+      <% @workout.programs.each do |program| %>
+        <li class="list-group-item"><%= program.name %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="form-action">
+  <%= link_to "No, Take Me To Safety".html_safe, workouts_path, class: "btn btn-default btn-lg btn-block" %>
+</div>
+
+<div class="form-action">
+  <%= link_to "Yes, Delete".html_safe, workout_path(@workout), method: "delete", class: "btn btn-danger btn-lg btn-block" %>
+</div>
