@@ -15,7 +15,7 @@ class ProgramsController < ApplicationController
     if @program.save
       @program.link_workouts(workout_ids)
       @program.set_workout_order(workout_ids)
-      @program.update_active if active?
+      @program.set_as_active(current_user) if active?
       redirect_to programs_path
     else
       render :new
@@ -34,20 +34,20 @@ class ProgramsController < ApplicationController
 
   def make_active
     @program = Program.find(params[:id])
-    @program.update_active
+    @program.set_as_active(current_user.id)
     redirect_to program_path(@program)
   end
 
   private
 
   def initial_params
-    { name: params[:program][:name], user_id: params[:program][:user_id] }
+    { name: params[:program][:name], creator_id: params[:program][:creator_id] }
   end
 
   def program_params
     params.require(:program).permit(
       :name,
-      :user_id,
+      :creator_id,
       :workout_ids,
       :active
     )

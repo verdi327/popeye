@@ -1,12 +1,10 @@
 class Program < ActiveRecord::Base
   has_many :program_workouts, dependent: :destroy
   has_many :workouts, through: :program_workouts
-  belongs_to :user
+  has_many :user_programs
+  has_many :users, through: :user_programs
   validates :name, presence: {message: "a program name is required"}, length: {maximum: 30, message: "program name is too long"}
-
-  def self.active(user)
-    where(user_id: user.id).where(active: true).first
-  end
+  after_create :create_user_program_record
 
   def next_workout
     current_index = workout_order.find_index(current_workout.to_s)
@@ -32,21 +30,29 @@ class Program < ActiveRecord::Base
     end
   end
 
-  def active_already_exists?
-    self.class.where(user_id: user_id).where(active: true).size > 0
+  def active_already_exists?(user)
+    user.programs.where(active: true).size > 0
+    # self.class.where(user_id: user_id).where(active: true).size > 0
   end
 
-  def currently_active
-    self.class.where(user_id: user_id).where(active: true).first
+  def current_active_program(user)
+    user.programs.where(active: true).first
+    # self.class.where(user_id: user_id).where(active: true).first
   end
 
-  def update_active
-    if active_already_exists?
-      currently_active.update_attribute :active, false
+  def set_as_active(user)
+    if active_already_exists?(user)
+      current_active_program(user).update_attribute :active, false
       update_attribute :active, true
     else
       update_attribute :active, true
     end
+  end
+
+  private
+
+  def create_user_program_record
+    UserProgram.create(program_id: id, user_id: creator_id)
   end
 
 end
