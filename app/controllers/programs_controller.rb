@@ -41,7 +41,7 @@ class ProgramsController < ApplicationController
   private
 
   def initial_params
-    { name: params[:program][:name], creator_id: params[:program][:creator_id] }
+    { name: params[:program][:name], creator_id: params[:program][:creator_id], available_in_store: params[:program][:available_in_store] }
   end
 
   def program_params
@@ -49,7 +49,8 @@ class ProgramsController < ApplicationController
       :name,
       :creator_id,
       :workout_ids,
-      :active
+      :active,
+      :available_in_store
     )
   end
 

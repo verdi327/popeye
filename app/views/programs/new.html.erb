@@ -22,7 +22,9 @@
         <li class="placeholder-text">Add Workouts Here</li>
       </ul>
       <%= f.check_box :active %>
-      <%= f.label :active, "Set this program as active" %>
+      <%= f.label :active, "Set this program as active" %></br>
+      <%= f.check_box :available_in_store %>
+      <%= f.label :available_in_store, "Make available in store?" %>
     </div>
   </div>
   <%= f.hidden_field :workout_ids, value: "" %>

@@ -6,6 +6,8 @@ class Program < ActiveRecord::Base
   validates :name, presence: {message: "a program name is required"}, length: {maximum: 30, message: "program name is too long"}
   after_create :create_user_program_record
 
+  scope :available_in_store, Proc.new { where(available_in_store: true) }
+
   def next_workout
     current_index = workout_order.find_index(current_workout.to_s)
     next_index = current_index + 1
@@ -32,12 +34,10 @@ class Program < ActiveRecord::Base
 
   def active_already_exists?(user)
     user.programs.where(active: true).size > 0
-    # self.class.where(user_id: user_id).where(active: true).size > 0
   end
 
   def current_active_program(user)
     user.programs.where(active: true).first
-    # self.class.where(user_id: user_id).where(active: true).first
   end
 
   def set_as_active(user)
