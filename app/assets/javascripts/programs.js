@@ -50,6 +50,18 @@ $(document).ready(function() {
     $(".program-exercise-list").slideToggle("slow");
   })
 
+  $(".store-fields").hide();
+  $(".container").on("change", "#program_available_in_store", function(){
+    if(wants_in_store(this)){
+      $(".store-fields").show();
+    } else {
+      $(".store-fields").hide();
+    }
+  });
+  function wants_in_store(element){
+    return $(element).is(":checked")
+  };
+
 
 
 });

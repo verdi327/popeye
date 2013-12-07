@@ -16,16 +16,26 @@
   float:right;
   margin-top:-11px
 }
-.view-exercises{margin-left:10px}
 
-#workout-list,
-.program-exercise-lift{list-style-type:none}
-.program-workout{
-  border:1px solid #ccc;
-  padding:11px;
-  margin-bottom:-1px
+#workout-list{
+  list-style-type:none;
+  padding-left:0px;
+  .program-exercise-lift{list-style-type:none};
+  .program-workout{
+    border:1px solid #ccc;
+    padding:11px;
+    margin-bottom:-1px
+  }
 }
 
 .no-programs{
   margin-left:15px
+}
+
+.store-fields{
+  margin-top:10px;
+  #program_description{height:100px}
+  .form-control{
+    margin-bottom:10px
+  }
 }

@@ -8,8 +8,7 @@ class User < ActiveRecord::Base
   has_many :workouts
   has_many :workout_results
 
-  def formatted_date
-    date = created_at
-    date.strftime("%a, %b #{date.day.ordinalize} %Y")
+  def active_program
+    programs.where(active: true).first
   end
 end

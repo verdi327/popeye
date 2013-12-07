@@ -24,6 +24,7 @@
         <li><%= link_to "Program Library", programs_path, class: "list-group-item" %></li>
         <li><%= link_to "Workout Log", workout_log_path, class: "list-group-item" %></li>
         <li><%= link_to "Profile", user_path(current_user), class: "list-group-item" %></li>
+        <li><%= link_to "Store", store_index_path, class: "list-group-item" %></li>
         <% unless mobile_device? %>
           <li><%= link_to "Create New Workout", new_workout_path, class: "list-group-item" %></li>
           <li><%= link_to "Create New Program", new_program_path, class: "list-group-item" %></li>

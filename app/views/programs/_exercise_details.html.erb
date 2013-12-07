@@ -1,0 +1,16 @@
+<%= link_to "View Exercises", "#", class: "btn btn-sm btn-default view-exercises" %>
+<ul id="workout-list">
+<% program.workouts.each do |workout| %>
+  <li class="program-workout">
+    <%= workout.name %>
+    <ul class="program-exercise-list">
+    <% workout.exercises.each do |exercise| %>
+      <li>
+        <%= exercise.name %>
+        <span> - <%= exercise.routine %></span>
+      </li>
+    <% end %>
+    </ul>
+  </li>
+<% end %>
+</ul>

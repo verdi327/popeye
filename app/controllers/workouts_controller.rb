@@ -3,7 +3,7 @@ class WorkoutsController < ApplicationController
 
   def index
     @workouts = current_user.workouts
-    @active_program = Program.active(current_user)
+    @active_program = current_user.active_program
     @current_workout = @workouts.where(id: @active_program.current_workout).first if @active_program
   end
 
