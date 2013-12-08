@@ -41,7 +41,11 @@ class ProgramsController < ApplicationController
   private
 
   def initial_params
-    { name: params[:program][:name], creator_id: params[:program][:creator_id], available_in_store: params[:program][:available_in_store] }
+    { name: params[:program][:name],
+      creator_id: params[:program][:creator_id],
+      available_in_store: params[:program][:available_in_store],
+      skill_level: params[:program][:skill_level],
+      description: params[:program][:description] }
   end
 
   def program_params
@@ -50,7 +54,9 @@ class ProgramsController < ApplicationController
       :creator_id,
       :workout_ids,
       :active,
-      :available_in_store
+      :available_in_store,
+      :skill_level,
+      :description
     )
   end
 
@@ -61,5 +67,10 @@ class ProgramsController < ApplicationController
   def active?
     params[:program][:active] == "1"
   end
+
+  def skill_levels
+    SKILL_LEVELS
+  end
+  helper_method :skill_levels
 
 end

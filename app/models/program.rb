@@ -4,6 +4,8 @@ class Program < ActiveRecord::Base
   has_many :user_programs
   has_many :users, through: :user_programs
   validates :name, presence: {message: "a program name is required"}, length: {maximum: 30, message: "program name is too long"}
+  validates :description, presence: {message: "a program description is required"}, length: {maximum: 500, message: "description can only be a max of 500 characters"}, if: "available_in_store.present?"
+  validates :skill_level, presence: {message: "a skill level is required"}, if: "available_in_store.present?"
   after_create :create_user_program_record
 
   scope :available_in_store, Proc.new { where(available_in_store: true) }

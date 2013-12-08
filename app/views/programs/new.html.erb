@@ -22,9 +22,15 @@
         <li class="placeholder-text">Add Workouts Here</li>
       </ul>
       <%= f.check_box :active %>
-      <%= f.label :active, "Set this program as active" %></br>
+      <%= f.label :active, "Set this program as active?" %></br>
       <%= f.check_box :available_in_store %>
-      <%= f.label :available_in_store, "Make available in store?" %>
+      <%= f.label :available_in_store, "Make available in store?" %></br>
+      <div class="store-fields">
+        <%= f.label :description, "Please describe the program" %>
+        <%= f.text_area :description, class: "form-control" %>
+        <%= f.label :skill_level, "Skill level needed" %>
+        <%= f.select :skill_level, options_for_select(skill_levels), { prompt: "-select-"}, {class: "form-control"} %>
+      </div>
     </div>
   </div>
   <%= f.hidden_field :workout_ids, value: "" %>
