@@ -1,0 +1,16 @@
+<h3>All Roads Start Here</h3>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title">
+      <%= @program.name %>
+    </h1>
+  </div>
+  <div class="panel-body">
+    <div class="description"><%= @program.description %></div>
+    <%= render partial: "programs/exercise_details", locals: {program: @program} %>
+  </div>
+</div>
+
+<div class="form-action">
+  <%= link_to "<span class='icon-rocket'></span> Start Program".html_safe, "#", class: "btn btn-default btn-lg btn-block" %>
+</div>

@@ -19,7 +19,13 @@ Popeye::Application.routes.draw do
       post "make_active"
     end
   end
-  resources :store, only: [:index]
+  resources :store do
+    collection do
+      get :beginner
+      get :intermediate
+      get :advanced
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

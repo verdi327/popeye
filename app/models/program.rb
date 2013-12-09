@@ -9,6 +9,9 @@ class Program < ActiveRecord::Base
   after_create :create_user_program_record
 
   scope :available_in_store, Proc.new { where(available_in_store: true) }
+  scope :beginner_programs, Proc.new { available_in_store.where(skill_level: "beginner") }
+  scope :intermediate_programs, Proc.new { available_in_store.where(skill_level: "intermediate") }
+  scope :advanced_programs, Proc.new { available_in_store.where(skill_level: "advanced") }
 
   def next_workout
     current_index = workout_order.find_index(current_workout.to_s)
