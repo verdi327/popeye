@@ -12,6 +12,11 @@ class Workout < ActiveRecord::Base
   belongs_to :user
   validates :name, presence: {message: "a workout name is required"}, length: {maximum: 30, message: "workout name too long"}
 
+  amoeba do
+    enable
+    include_field :exercises
+  end
+
   def total_attempts
     WorkoutResult.where(workout_id: id).size
   end

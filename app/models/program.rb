@@ -20,10 +20,10 @@ class Program < ActiveRecord::Base
     update_attribute :current_workout, workout_order[next_index]
   end
 
-  def link_workouts(workout_ids)
+  def link_workouts(workout_ids, program_id=id)
     unless workout_ids.blank?
       workout_ids.each do |workout_id|
-        ProgramWorkout.create!(program_id: id, workout_id: workout_id)
+        ProgramWorkout.create!(program_id: program_id, workout_id: workout_id)
       end
     end
   end
@@ -43,7 +43,7 @@ class Program < ActiveRecord::Base
     self.class.where(user_id: user_id).where(active: true).first
   end
 
-  def update_active
+  def set_as_active
     if active_already_exists?
       currently_active.update_attribute :active, false
       update_attribute :active, true
@@ -52,5 +52,23 @@ class Program < ActiveRecord::Base
     end
   end
 
+  def copy_to_user(user)
+    copied_workout_ids = workouts.map do |workout|
+      copy = workout.amoeba_dup
+      copy.save
+      copy.id
+    end
+    program_copy = create_program_copy(user)
+    link_workouts(copied_workout_ids, program_copy.id)
+  end
+
+  private
+
+  def create_program_copy(user)
+    program_copy = dup
+    program_copy.save
+    program_copy.update_attribute :user_id, user.id
+    program_copy
+  end
 end
 

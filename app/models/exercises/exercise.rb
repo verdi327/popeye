@@ -10,6 +10,10 @@ class Exercise < ActiveRecord::Base
   after_create :set_current_weight
   store_accessor :data
 
+  amoeba do
+    enable
+  end
+
   def static_rep?
     type == "StaticRep"
   end
