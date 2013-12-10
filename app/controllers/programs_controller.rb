@@ -1,4 +1,6 @@
 class ProgramsController < ApplicationController
+  before_action :find_program, only: [:show, :destroy, :make_active, :current_weight_metrics, :update_current_weight_metrics]
+  before_action :require_exercise_weights, only: [:update_current_weight_metrics]
 
   def index
     @programs = current_user.programs
@@ -23,22 +25,35 @@ class ProgramsController < ApplicationController
   end
 
   def show
-    @program = Program.find(params[:id])
+    if params[:new_from_store]
+      flash[:notice] = "Woot! New program. Before you begin make sure to set your proper starting weight by clicking 'View Current Weight Metrics' below"
+    end
   end
 
   def destroy
-    program = Program.find(params[:id])
-    program.destroy
+    @program.destroy
     redirect_to programs_path
   end
 
   def make_active
-    @program = Program.find(params[:id])
     @program.set_as_active
     redirect_to program_path(@program)
   end
 
+  def current_weight_metrics
+  end
+
+  def update_current_weight_metrics
+    @program.update_exercise_weights(params[:exercises])
+    flash[:notice] = "Current weight metrics successfully updated"
+    redirect_to program_path(@program)
+  end
+
   private
+
+  def find_program
+    @program = Program.find(params[:id])
+  end
 
   def initial_params
     { name: params[:program][:name],
@@ -73,5 +88,13 @@ class ProgramsController < ApplicationController
     SKILL_LEVELS
   end
   helper_method :skill_levels
+
+  def require_exercise_weights
+    if params[:exercises].values.any? {|weight| weight.blank?}
+      flash[:error] = "Every exercise must have a numeric weight value"
+      redirect_to current_weight_metrics_program_path(@program)
+      return
+    end
+  end
 
 end

@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title"><b>Current Weight Metrics</b></h1>
+  </div>
+
+  <div class="panel-body">
+    <%= form_tag update_current_weight_metrics_program_path(@program), method: "post", id: "current-weight-form" do %>
+        <% @program.exercises.each do |exercise| %>
+          <%= label_tag exercise.name %>
+          <%= number_field_tag "[exercises][#{exercise.id}]", exercise.current_weight, class: "form-control"  %>
+        <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="form-action">
+  <%= link_to "<span class='icon-edit'></span>Update Weight Metrics".html_safe, "#", class: "btn btn-default btn-lg btn-block", id: "update-weight-metrics" %>
+</div>
+
+<div class="form-action">
+  <%= link_to "<span class='icon-chevron-left'></span> Back".html_safe, program_path(@program), class: "btn btn-primary btn-lg btn-block" %>
+</div>

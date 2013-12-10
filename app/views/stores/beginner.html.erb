@@ -12,5 +12,5 @@
 </div>
 
 <div class="form-action">
-  <%= link_to "<span class='icon-rocket'></span> Start Program".html_safe, "#", class: "btn btn-default btn-lg btn-block" %>
+  <%= link_to "<span class='icon-rocket'></span> Start Program".html_safe, copy_to_user_stores_path(program_id: @program.id), method: "post", class: "btn btn-default btn-lg btn-block" %>
 </div>

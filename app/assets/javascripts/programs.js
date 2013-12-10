@@ -62,6 +62,8 @@ $(document).ready(function() {
     return $(element).is(":checked")
   };
 
-
+  $("#update-weight-metrics").on("click", function(){
+    $("#current-weight-form").submit();
+  });
 
 });

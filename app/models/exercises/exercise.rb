@@ -30,7 +30,7 @@ class Exercise < ActiveRecord::Base
     {
       "Set Reps (set number of reps and sets)"               => "StaticRep",
       "Pyramid Reps (set number of sets with variable reps)" => "PyramidRep",
-      "Time Based (as many reps in a minute)"                => "TimeRep"
+      "Time Based (as many reps in a given time period)"     => "TimeRep"
     }
   end
 

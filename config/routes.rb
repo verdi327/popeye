@@ -3,6 +3,8 @@ Popeye::Application.routes.draw do
   resources :users, only: [:show]
   root 'workouts#index'
   get "workout_log" => "workout_results#index", as: :workout_log
+  get "store" => "stores#index", as: :store
+
   resources :workouts do
     member do
       get "confirm_delete"
@@ -17,13 +19,16 @@ Popeye::Application.routes.draw do
   resources :programs do
     member do
       post "make_active"
+      get "current_weight_metrics"
+      post "update_current_weight_metrics"
     end
   end
-  resources :store do
+  resources :stores, only: [:index] do
     collection do
       get :beginner
       get :intermediate
       get :advanced
+      post :copy_to_user
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

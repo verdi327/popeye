@@ -35,14 +35,6 @@ class Program < ActiveRecord::Base
     end
   end
 
-  def active_already_exists?
-    self.class.where(user_id: user_id).where(active: true).size > 0
-  end
-
-  def currently_active
-    self.class.where(user_id: user_id).where(active: true).first
-  end
-
   def set_as_active
     if active_already_exists?
       currently_active.update_attribute :active, false
@@ -60,9 +52,29 @@ class Program < ActiveRecord::Base
     end
     program_copy = create_program_copy(user)
     link_workouts(copied_workout_ids, program_copy.id)
+    program_copy.set_as_active
+  end
+
+  def exercises
+    workouts.map {|workout| workout.exercises}.flatten
+  end
+
+  def update_exercise_weights(exercise_data)
+    exercise_data.each do |id, weight|
+      ex = Exercise.find id
+      ex.update_attribute :current_weight, weight
+    end
   end
 
   private
+
+  def active_already_exists?
+    self.class.where(user_id: user_id).where(active: true).size > 0
+  end
+
+  def currently_active
+    self.class.where(user_id: user_id).where(active: true).first
+  end
 
   def create_program_copy(user)
     program_copy = dup

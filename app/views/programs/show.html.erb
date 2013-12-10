@@ -19,5 +19,9 @@
 <% end %>
 
 <div class="form-action">
+  <%= link_to "View Current Weight Metrics", current_weight_metrics_program_path(@program), class: "btn btn-default btn-lg btn-block" %>
+</div>
+
+<div class="form-action">
   <%= link_to "<span class='icon-remove'></span> Delete".html_safe, program_path(@program), method: "delete", class: "btn btn-danger btn-lg btn-block" %>
 </div>
