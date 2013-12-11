@@ -31,3 +31,9 @@
     </table>
   </div>
 </div>
+
+<% unless mobile_device? %>
+  <div class="form-action">
+    <%= link_to "<span class='icon-bolt'></span> Create Program".html_safe, new_program_path, class: "btn btn-default btn-lg btn-block" %>
+  </div>
+<% end %>

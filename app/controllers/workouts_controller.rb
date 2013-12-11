@@ -3,8 +3,6 @@ class WorkoutsController < ApplicationController
 
   def index
     @workouts = current_user.workouts
-    @active_program = current_user.active_program
-    @current_workout = @active_program.workouts.where(id: @active_program.current_workout).first if @active_program
   end
 
   def new
