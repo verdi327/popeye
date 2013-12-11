@@ -1,3 +1,5 @@
+$color-light-grey: rgb(242,242,242);
+
 #logo{
   float:left
 }
@@ -8,3 +10,13 @@
   width:50%;
   margin-top:20px
 }
+
+// body metrics
+.body-metrics{
+  .sub-text{margin-top:-11px};
+  #gender_male{margin-bottom:15px}
+}
+.add-gender,
+.add-weight{margin-top:15px; font-size:16px}
+.gender-text{margin-left:5px; font-size:16px}
+.welcome-text{font-size:14px}

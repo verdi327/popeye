@@ -50,7 +50,7 @@ class Program < ActiveRecord::Base
       copy.save
       copy.id
     end
-    program_copy = create_program_copy(user)
+    program_copy = create_program_copy(user, copied_workout_ids)
     link_workouts(copied_workout_ids, program_copy.id)
     program_copy.set_as_active
   end
@@ -76,10 +76,10 @@ class Program < ActiveRecord::Base
     self.class.where(user_id: user_id).where(active: true).first
   end
 
-  def create_program_copy(user)
+  def create_program_copy(user, copied_workout_ids)
     program_copy = dup
     program_copy.save
-    program_copy.update_attribute :user_id, user.id
+    program_copy.update_attributes(user_id: user.id, workout_order: copied_workout_ids, current_workout: copied_workout_ids.first)
     program_copy
   end
 end

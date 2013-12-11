@@ -1,6 +1,12 @@
 Popeye::Application.routes.draw do
-  devise_for :users
-  resources :users, only: [:show]
+  devise_for :users, :controllers => { :registrations => "registrations" }
+  resources :users, only: [:show] do
+    member do
+      get "summary"
+    end
+    resources :body_metrics, only: [:new, :create]
+    resources :max_lifts, only: [:new, :create]
+  end
   root 'workouts#index'
   get "workout_log" => "workout_results#index", as: :workout_log
   get "store" => "stores#index", as: :store

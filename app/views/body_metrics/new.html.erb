@@ -1,0 +1,28 @@
+<h3>Howdy, <%= @user.email%></h3>
+
+<div class="welcome-text">
+  Thanks for signing up.  To create better program recommendations, we need to gather a few more pieces of information.
+</div>
+
+<div class="body-metrics">
+  <%= form_tag user_body_metrics_path(@user), method: "post" do %>
+
+    <fieldset>
+      <div class="form-group">
+        <div class="add-gender">
+          <p><b>Gender</b></p>
+          <%= radio_button_tag :gender, "male", true %><span class="gender-text">Male</span></br>
+          <%= radio_button_tag :gender, "female" %><span class="gender-text">Female</span></br>
+        </div>
+
+        <div class="add-weight">
+          <p><b>Current Weight</b></p>
+          <p class="sub-text">(best guess, can always change later)</p>
+          <%= number_field_tag :weight, {}, class: "form-control" %>
+        </div>
+      </div>
+    </fieldset>
+
+    <%= submit_tag "Continue", class: "btn btn-default btn-lg btn-block" %>
+  <% end %>
+<div>

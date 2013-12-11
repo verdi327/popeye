@@ -1,0 +1,51 @@
+<h3>Current Max Lifts</h3>
+
+<div class="explantory-text">
+  <p>
+    Finally, we need to know a ballpark estimate for your current strength level. For each of the below exercises record the most weight you can do for a single rep.  This is known as your 1 RM.
+  </p>
+
+  <p>
+    The six moves below are good benchmarks for overall strength because they are compound movements that work the body's major muscle groups.
+  </p>
+
+  <p>
+    It's okay if you don't know your lifts exactly. Air on the lighter side. Take your best guess and subtract 40lbs from it.
+  </p>
+</div>
+
+<%= form_tag user_max_lifts_path(@user), method: "post" do |f| %>
+  <fieldset>
+    <div class="form-group">
+      <p><b>Squat</b></p>
+      <%= number_field_tag "[max_lifts][squat]", {}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <p><b>Bench Press</b></p>
+      <%= number_field_tag "[max_lifts][bench press]", {}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <p><b>Press</b></p>
+      <%= number_field_tag "[max_lifts][press]", {}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <p><b>Deadlift</b></p>
+      <%= number_field_tag "[max_lifts][deadlift]", {}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <p><b>Power Clean</b></p>
+      <%= number_field_tag "[max_lifts][power clean]", {}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <p><b>Bent Over Row</b></p>
+      <%= number_field_tag "[max_lifts][bent over row]", {}, class: "form-control" %>
+    </div>
+  </fieldset>
+  <%= submit_tag "Record", class: "btn btn-default btn-lg btn-block" %>
+<% end %>
+
