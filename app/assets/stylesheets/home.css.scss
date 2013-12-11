@@ -1,0 +1,27 @@
+.splash-text{
+  h1{font-size:75px; font-weight:500};
+  .mid{font-size:44px; line-height:1; font-weight:300; margin-top:17px};
+  .bottom{font-size:32px; line-height:1; margin-top:25px; font-weight:500; margin-bottom:35px };
+}
+
+#logo{
+  float:left
+}
+
+.signup-form{
+  h1{margin-bottom:20px}
+  float:right;
+  width:50%;
+  margin-top:20px;
+  #learn-more{margin-bottom:34px}
+}
+
+// body metrics
+.body-metrics{
+  .sub-text{margin-top:-11px};
+  #gender_male{margin-bottom:15px}
+}
+.add-gender,
+.add-weight{margin-top:15px; font-size:16px}
+.gender-text{margin-left:5px; font-size:16px}
+.welcome-text{font-size:14px}

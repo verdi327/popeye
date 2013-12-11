@@ -1,0 +1,26 @@
+<div class="splash-text">
+  <h1>Stop Dicking Around in the Gym</h1>
+  <div class="mid">
+    No more curls on a bosu ball, jockeying an elliptical for 45 minutes, or doing 100 burpees for time. If you want to build muscle and burn fat the answer is to build strength
+  </div>
+  <div class="bottom">
+    Signup for Popeye. It's free, designed for beginners and never peddles expensive supplements. Life's too short not to have the body you want.
+  </div>
+</div>
+
+<% unless mobile_device? %>
+  <div id="logo">
+    <%= image_tag "popeye.png" %>
+    <h1>Get In. Get Strong. Get On.</h1>
+  </div>
+<% end %>
+
+<% css_class = mobile_device? ? "signup-form-mobile" : "signup-form" %>
+<div class="<%= css_class %>">
+  <div id="learn-more">
+    <%= link_to "learn more about Popeye's approach <span class='icon-double-angle-right'></span>".html_safe, "", class: "btn btn-default btn-lg btn-block" %>
+  </div>
+
+  <h1>Sign up</h1>
+  <%= render partial: "devise/registrations/form" %>
+</div>

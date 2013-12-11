@@ -7,7 +7,7 @@ Popeye::Application.routes.draw do
     resources :body_metrics, only: [:new, :create]
     resources :max_lifts, only: [:new, :create]
   end
-  root 'workouts#index'
+  root 'home#show'
   get "workout_log" => "workout_results#index", as: :workout_log
   get "store" => "stores#index", as: :store
   get "users/:user_id/dashboard" => "dashboards#index", as: :dashboard
