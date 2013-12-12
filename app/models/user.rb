@@ -12,4 +12,9 @@ class User < ActiveRecord::Base
   def active_program
     programs.where(active: true).first
   end
+
+  def approved_trainer?
+    return false if roles.nil?
+    roles.include?("approved_trainer")
+  end
 end
