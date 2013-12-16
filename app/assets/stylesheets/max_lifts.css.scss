@@ -1,0 +1,9 @@
+$primary: #7a62d3;
+$white: #fff;
+
+.max-lift-summary{
+  h1{font-size:33px}
+  h3{font-size:22px}
+  .overall{background: $primary; color: $white}
+  .sub-text{margin-top:-9px}
+}

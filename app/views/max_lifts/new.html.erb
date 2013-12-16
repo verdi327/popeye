@@ -6,7 +6,7 @@
   </p>
 
   <p>
-    The six moves below are good benchmarks for overall strength because they are compound movements that work the body's major muscle groups.
+    The three moves below are good benchmarks for overall strength because they are compound movements that work the body's major muscle groups.
   </p>
 
   <p>
@@ -14,7 +14,7 @@
   </p>
 </div>
 
-<%= form_tag user_max_lifts_path(@user), method: "post" do |f| %>
+<%= form_tag user_max_lifts_path(current_user), method: "post" do |f| %>
   <fieldset>
     <div class="form-group">
       <p><b>Squat</b></p>
@@ -27,23 +27,8 @@
     </div>
 
     <div class="form-group">
-      <p><b>Press</b></p>
-      <%= number_field_tag "[max_lifts][press]", {}, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
       <p><b>Deadlift</b></p>
       <%= number_field_tag "[max_lifts][deadlift]", {}, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <p><b>Power Clean</b></p>
-      <%= number_field_tag "[max_lifts][power clean]", {}, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <p><b>Bent Over Row</b></p>
-      <%= number_field_tag "[max_lifts][bent over row]", {}, class: "form-control" %>
     </div>
   </fieldset>
 

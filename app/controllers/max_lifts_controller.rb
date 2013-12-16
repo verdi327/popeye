@@ -1,20 +1,19 @@
 class MaxLiftsController < ApplicationController
-  before_action :find_user, only: [:new, :create]
   before_action :validate_max_lifts, only: [:create]
 
   def new
   end
 
   def create
-    MaxLift.record(params[:max_lifts], @user)
-    redirect_to summary_user_path(@user)
+    MaxLift.record(params[:max_lifts], current_user)
+    redirect_to summary_user_max_lifts_path(current_user)
+  end
+
+  def summary
+    @strength_level = StrengthCalculator.new(current_user)
   end
 
   private
-
-  def find_user
-    @user = User.find params[:user_id]
-  end
 
   def validate_max_lifts
     if !valid_exercise_names?
@@ -41,6 +40,6 @@ class MaxLiftsController < ApplicationController
   end
 
   def allowed_names
-    ["squat", "press", "bench press", "deadlift", "bent over row", "power clean"]
+    ["squat", "bench press", "deadlift"]
   end
 end

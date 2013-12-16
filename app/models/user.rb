@@ -17,4 +17,16 @@ class User < ActiveRecord::Base
     return false if roles.nil?
     roles.include?("approved_trainer")
   end
+
+  def male?
+    gender == "male"
+  end
+
+  def female?
+    gender == "female"
+  end
+
+  def no_workouts?
+    workouts.empty?
+  end
 end

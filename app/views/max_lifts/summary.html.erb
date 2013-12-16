@@ -1,0 +1,54 @@
+<div class="max-lift-summary">
+  <h1>How You Stack Up</h1>
+  <p>
+    To determine your strength level, strength norms have been established that compare your 1RM in each lift to your body weight.
+  </p>
+
+  <p>
+    For example, a person weighing 150lbs that can bench press 150lbs, squat 300lbs, and deadlift 300lbs would have a strength ratio of 1:2:2.
+  </p>
+
+  <p>
+    The following strength norms were derived from testing healthy and active males and females across the United States.
+  </p>
+
+  <h3>Common Goal Benchmarks</h3>
+  <% if current_user.male? %>
+    <p class="sub-text">*order is bench press, squat, deadlift</p>
+    <div class="strength-goals">
+      <div class="list-group">
+        <div class="list-group-item">
+          <p>Top 25%: 1:1.5:1.5</p>
+        </div>
+        <div class="list-group-item">
+          <p>Top 10%: 1.5:2:2</p>
+        </div>
+        <div class="list-group-item">
+          <p>Top 1%: 2:3:3</p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <h4>At Your Current Weight: <%= current_user.weight %>lbs</h4>
+  <div class="list-group">
+    <div class="list-group-item">
+      <p>Bench Press: <%= @strength_level.bench_press_percentile %> percentile</p>
+    </div>
+    <div class="list-group-item">
+      <p>Squat: <%= @strength_level.squat_percentile %> percentile</p>
+    </div>
+    <div class="list-group-item">
+      <p>Deadlift: <%= @strength_level.deadlift_percentile %> percentile</p>
+    </div>
+    <div class="list-group-item overall">
+      <p>Overall Strength: <%= @strength_level.overall %> percentile</p>
+    </div>
+  </div>
+</div>
+
+<% if current_user.no_workouts? %>
+  <div class="form-action">
+    <%= link_to "Start New Workout Program!", beginner_stores_path, class: "btn btn-default btn-lg btn-block" %>
+  </div>
+<% end %>

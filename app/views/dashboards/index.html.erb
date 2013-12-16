@@ -5,14 +5,14 @@
 <% else %>
   <h4><b>No Active Programs Found</b></h4>
   <p>Being consistent in your workout regimine is all about inertia.  The best way to keep your inertia is by following a program.</p>
-  <% if has_no_workouts? %>
+  <% if current_user.no_workouts? %>
     <p>Head over to the store where you can find your next awesome program</p>
     <%= link_to "To The Store", store_path, class: "btn btn-default btn-lg btn-block" %>
-  <% elsif mobile_device? && !has_no_workouts? %>
+  <% elsif mobile_device? && !current_user.no_workouts? %>
     <p>Head over to the store where you can find your next awesome program or you can choose to do a one off workout from your workout library</p>
     <%= link_to "To The Store", store_path, class: "btn btn-default btn-lg btn-block" %>
     <%= link_to "To My Workout library", workouts_path, class: "btn btn-default btn-lg btn-block" %>
-  <% elsif !has_no_workouts? %>
+  <% elsif !current_user.no_workouts? %>
     <p>So, you got some options</p>
     <div class="list-group">
       <%= link_to "Pick a program from the store", store_path, class: "btn btn-default btn-lg btn-block" %>
