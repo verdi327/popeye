@@ -1,0 +1,13 @@
+<div class="nested-fields">
+  <div class="lift-detail-group">
+    <%= f.label :set %>
+    <%= f.text_field :set, class: "small-input-field" %>
+    <span class="align-lift-details">
+      <%= f.label :reps %>
+      <%= f.text_field :reps, class: "small-input-field" %>
+    </span>
+    <%= f.label :weight %>
+    <%= f.text_field :weight, class: "small-input-field" %> lbs
+  </div>
+  <div class="remove-lift-detail"><%= link_to_remove_association "<span class='icon-remove-sign icon-2x'></span>".html_safe, f %></div>
+</div>

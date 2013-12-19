@@ -2,6 +2,7 @@
   <%= workout_form.hidden_field :workout_id, value: @workout_result.workout_id %>
   <%= workout_form.hidden_field :program_id, value: @workout_result.program_id %>
   <%= workout_form.hidden_field :user_id, value: current_user.id %>
+  <%= workout_form.hidden_field :workout_name, value: @exercises.first.workout.name %>
   <% @exercises.each_with_index do |exercise, e_index| %>
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -10,8 +11,10 @@
       </div>
       <%= workout_form.fields_for :exercise_results do |exercise_result_form| %>
         <%= exercise_result_form.hidden_field :exercise_id, value: exercise.id %>
+        <%= exercise_result_form.hidden_field :exercise_name, value: exercise.name %>
+        <%= exercise_result_form.hidden_field :prescribed_lift, value: exercise.routine %>
         <p class="panel-body">
-        <% exercise.lift_details.each_with_index do |detail, l_index| %>
+        <% exercise.lift_details.by_set.each_with_index do |detail, l_index| %>
           <%= exercise_result_form.fields_for :lift_results do |lift_result_form| %>
             <%= lift_result_form.hidden_field :set, value: detail.set %>
             <%= lift_result_form.hidden_field :goal_reps, value: detail.reps %>

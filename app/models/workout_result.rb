@@ -7,16 +7,15 @@ class WorkoutResult < ActiveRecord::Base
   after_save :update_current_workout, if: Proc.new {|wr| wr.program.present?}
 
   def success?
-    exercise_results.all? {|exercise_result| exercise_result.success?}
+    exercise_results.all? {|exercise_result| exercise_result.increase_weight_strategy_met?}
   end
 
-  def reset_to_previous!
-    if success?
-      workout.exercises.each do |exercise|
-        weight = exercise.current_weight - exercise.increment_weight_by
-        exercise.update_attribute(:current_weight, weight)
-      end
-    end
+  def lastest_workout?
+    self.class.last == self
+  end
+
+  def associated_workout_exists?
+    Workout.find_by_id(workout_id).present?
   end
 
   private

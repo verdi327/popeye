@@ -11,30 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131212172822) do
+ActiveRecord::Schema.define(version: 20131221214558) do
 
   create_table "exercise_results", force: true do |t|
     t.integer  "workout_result_id"
-    t.integer  "exercise_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "prescribed_lift"
+    t.string   "status"
+    t.string   "exercise_name"
+    t.string   "next_lift"
+    t.integer  "exercise_id"
   end
 
-  add_index "exercise_results", ["exercise_id"], name: "index_exercise_results_on_exercise_id", using: :btree
   add_index "exercise_results", ["workout_result_id"], name: "index_exercise_results_on_workout_result_id", using: :btree
 
   create_table "exercises", force: true do |t|
     t.string   "name"
-    t.integer  "reps"
-    t.integer  "sets"
+    t.integer  "workout_id"
+    t.integer  "increase_weight_by"
+    t.integer  "decrease_weight_by"
+    t.integer  "increase_strategy"
+    t.integer  "decrease_strategy"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "workout_id"
-    t.integer  "initial_weight"
-    t.integer  "current_weight"
-    t.string   "type"
-    t.integer  "increment_weight_by"
-    t.hstore   "data"
   end
 
   add_index "exercises", ["workout_id"], name: "index_exercises_on_workout_id", using: :btree
@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(version: 20131212172822) do
     t.datetime "updated_at"
     t.integer  "program_id"
     t.integer  "user_id"
+    t.string   "workout_name"
   end
 
   add_index "workout_results", ["program_id"], name: "index_workout_results_on_program_id", using: :btree

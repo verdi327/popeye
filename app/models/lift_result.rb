@@ -2,9 +2,7 @@ class LiftResult < ActiveRecord::Base
   belongs_to :exercise_result
   after_save :determine_lift_success
 
-  def display_result
-    "Set #{set}: #{achieved_reps} @ #{used_weight}lbs"
-  end
+  default_scope { order(set: :asc) }
 
   private
 

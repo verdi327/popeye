@@ -7,7 +7,8 @@ class WorkoutsController < ApplicationController
 
   def new
     @workout = Workout.new
-    @workout.exercises.build
+    exercises = @workout.exercises.build
+    exercises.lift_details.build
   end
 
   def show
@@ -55,8 +56,17 @@ class WorkoutsController < ApplicationController
       :creator_id,
       exercises_attributes:
       [
-        :id, :name, :sets, :reps, :initial_weight, :type, :time, :increment_weight_by,
-        :delta_rep, :delta_weight, :direction, :start_rep, :_destroy
+        :id,
+        :name,
+        :increase_weight_by,
+        :decrease_weight_by,
+        :increase_strategy,
+        :decrease_strategy,
+        :_destroy,
+        lift_details_attributes:
+        [
+          :id, :set, :reps, :weight, :_destroy
+        ]
       ]
     )
   end

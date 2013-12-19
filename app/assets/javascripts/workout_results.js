@@ -104,7 +104,12 @@ $(document).ready(function() {
     var completedReps = element.text();
     var exerciseId = element.data("exercise-id");
     var liftId = element.data("lift-id");
-    $("#workout_result_exercise_results_attributes_" + exerciseId + "_lift_results_attributes_" + liftId + "_achieved_reps").val(completedReps);
+    var editId = element.data("edit-id") + "[achieved_reps]";
+    if (/undef/.test(editId)){
+      $("#workout_result_exercise_results_attributes_" + exerciseId + "_lift_results_attributes_" + liftId + "_achieved_reps").val(completedReps);
+    } else {
+      $("[name='" + editId + "']" ).val(completedReps);
+    }
   }
 
   function updateDisplay(watch){

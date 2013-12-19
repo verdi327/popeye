@@ -25,13 +25,17 @@ class WorkoutResultsController < ApplicationController
   end
 
   def edit
-    old_result = WorkoutResult.find(params[:id])
-    old_result.reset_to_previous!
-    @workout_result = WorkoutResult.new(workout_id: old_result.workout_id)
-    old_result.destroy
-    @exercises = @workout_result.workout.exercises
-    exercise_results = @workout_result.exercise_results.build
-    exercise_results.lift_results.build
+    @workout_result = WorkoutResult.find(params[:id])
+  end
+
+  def update
+    @workout_result = WorkoutResult.find(params[:id])
+    @workout_result.update(workout_result_params)
+    if @workout_result.save!
+      redirect_to workout_result_path(@workout_result)
+    else
+      render "edit"
+    end
   end
 
   def destroy
@@ -47,13 +51,17 @@ class WorkoutResultsController < ApplicationController
 
   def workout_result_params
     params.require(:workout_result).permit(
+      :id,
       :workout_id,
       :program_id,
       :user_id,
+      :workout_name,
       exercise_results_attributes:
       [
         :id,
         :exercise_id,
+        :exercise_name,
+        :prescribed_lift,
         lift_results_attributes:
         [
           :id,

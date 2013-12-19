@@ -4,28 +4,41 @@ class ExerciseResult < ActiveRecord::Base
   has_many :lift_results, dependent: :destroy
   accepts_nested_attributes_for :lift_results, allow_destroy: true
 
-  after_save :update_exercise_current_weight, if: :success?
+  after_save :manage_exercise_current_weight
 
   def success?
     lift_results.all? {|lift_result| lift_result.was_successful == true}
   end
 
-  def prescribed_lift
-    success? ? exercise.routine(past_weight) : exercise.routine
+  def failed?
+    lift_results.any? {|lift_result| lift_result.was_successful == false}
   end
 
-  def next_lift
-    exercise.routine
+  def increase_weight_strategy_met?
+    results = self.class.where(exercise_id: exercise_id).order(updated_at: :desc).first(exercise.increase_strategy)
+    return false if results.size < exercise.increase_strategy
+    results.all? {|exercise_result| exercise_result.success? }
   end
 
-  def past_weight
-    exercise.current_weight - exercise.increment_weight_by
+  def decrease_weight_strategy_met?
+    results = self.class.where(exercise_id: exercise_id).order(updated_at: :desc).first(exercise.decrease_strategy)
+    return false if results.size < exercise.decrease_strategy
+    results.all? {|exercise_result| exercise_result.failed? }
   end
 
   private
 
-  def update_exercise_current_weight
-    weight = exercise.current_weight + exercise.increment_weight_by
-    exercise.update_attribute :current_weight, weight
+  def manage_exercise_current_weight
+    if increase_weight_strategy_met?
+      update_column :status, "increased"
+      exercise.increase_weight
+    elsif decrease_weight_strategy_met?
+      update_column :status, "decreased"
+      exercise.decrease_weight
+    else
+      update_column :status, "no_change"
+    end
+    update_column :next_lift, exercise.reload.routine
   end
+
 end

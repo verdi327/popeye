@@ -4,10 +4,6 @@ module ApplicationHelper
     date.strftime("%a, %b #{date.day.ordinalize} %Y")
   end
 
-  def button_styling(result)
-    result.success? ? "btn-success" : "btn-danger"
-  end
-
   # devise helper methods
   def resource_name
     :user

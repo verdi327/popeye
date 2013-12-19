@@ -1,21 +1,53 @@
 <div class="nested-fields">
-  <fieldset>
-    <div class="form-group">
-      <%= f.label :name %>
-      <%= f.text_field :name, class: "form-control" %>
+
+  <fieldset class="exercise-group">
+    <div class="exercise-name">
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
     </div>
-    <div class="form-group">
-      <%= f.label :initial_weight %>
-      <%= f.number_field :initial_weight, class: "form-control initial-weight" %>
+
+    <div class="remove-exercise-wrapper">
+      <%= link_to_remove_association "remove exercise", f, class: "btn btn-danger btn-sm remove-exercise" %>
     </div>
-    <div class="form-group">
-      <%= f.label :increment_weight_by, "Upon successful completion, increment weight by how many lbs" %>
-      <%= f.number_field :increment_weight_by, class: "form-control" %>
+
+    <div style="clear:both"></div>
+
+    <div class="on-success">
+      <h3>Upon Success</h3>
+      <div class="form-group">
+        <%= f.label :increase_weight_by, "Increase weight by how many lbs" %>
+        <%= f.number_field :increase_weight_by, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :increase_strategy, "How many successful attempts before increasing" %>
+        <%= f.number_field :increase_strategy, class: "form-control" %>
+      </div>
     </div>
-    <div class="form-group">
-      <%= f.label :type %>
-      <%= f.select :type, Exercise.types_for_select, {prompt: "please select an exercise type"}, class: "form-control exercise-type" %>
+
+    <div class="on-failure">
+      <h3>Upon Failure</h3>
+      <div class="form-group">
+        <%= f.label :decrease_weight_by, "Decrease weight by how many lbs" %>
+        <%= f.number_field :decrease_weight_by, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :decrease_strategy, "How many failed attempts before decreasing" %>
+        <%= f.number_field :decrease_strategy, class: "form-control" %>
+      </div>
     </div>
+
+    <div style="clear:both"></div>
+
+    <h4>
+      Add Sets, Reps, and Weights
+      <%= link_to_add_association "add set", f, :lift_details, data: {:"association-insertion-method" => "after" }, class: "btn btn-success btn-sm add-lift-detail" %>
+    </h4>
+
+    <%= f.fields_for :lift_details do |builder| %>
+      <%= render "lift_detail_fields", f: builder %>
+    <% end %>
+
   </fieldset>
-  <%= link_to_remove_association "remove", f, class: "btn btn-danger btn-sm" %>
 </div>
