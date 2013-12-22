@@ -51,4 +51,8 @@
   <div class="form-action">
     <%= link_to "Start New Workout Program!", beginner_stores_path, class: "btn btn-default btn-lg btn-block" %>
   </div>
+<% elsif current_user.has_completed_workouts? %>
+  <div class="form-action">
+    <%= link_to "Retest Max Lifts", retest_user_max_lifts_path(current_user), class: "btn btn-default btn-lg btn-block" %>
+  </div>
 <% end %>

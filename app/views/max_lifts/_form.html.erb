@@ -1,0 +1,22 @@
+<%= form_tag user_max_lifts_path(current_user), method: "post" do |f| %>
+  <fieldset>
+    <div class="form-group">
+      <p><b>Squat</b></p>
+      <%= number_field_tag "[max_lifts][squat]", {}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <p><b>Bench Press</b></p>
+      <%= number_field_tag "[max_lifts][bench press]", {}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <p><b>Deadlift</b></p>
+      <%= number_field_tag "[max_lifts][deadlift]", {}, class: "form-control" %>
+    </div>
+  </fieldset>
+
+  <div class="form-action">
+    <%= submit_tag "Record", class: "btn btn-default btn-lg btn-block" %>
+  </div>
+<% end %>

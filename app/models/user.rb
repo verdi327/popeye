@@ -29,4 +29,8 @@ class User < ActiveRecord::Base
   def no_workouts?
     workouts.empty?
   end
+
+  def has_completed_workouts?
+    workout_results.present?
+  end
 end

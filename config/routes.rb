@@ -5,6 +5,7 @@ Popeye::Application.routes.draw do
     resources :max_lifts, only: [:new, :create] do
       collection do
         get "summary"
+        get "retest"
       end
     end
   end

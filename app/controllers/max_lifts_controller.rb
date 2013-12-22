@@ -13,6 +13,9 @@ class MaxLiftsController < ApplicationController
     @strength_level = StrengthCalculator.new(current_user)
   end
 
+  def retest
+  end
+
   private
 
   def validate_max_lifts
