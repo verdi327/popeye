@@ -62,11 +62,21 @@ class Program < ActiveRecord::Base
     workouts.map {|workout| workout.exercises}.flatten
   end
 
-  #FIXME exercises don't know of their weight anymore, only lift_details
+  # First key is the exercise id
+  # doing this switching bc some exercises weight remains the same for all of their lifts where others
+  # are pyramid type which need the specific weight passed for each set.
+  # {"1"=>{"3"=>"100", "2"=>"90", "1"=>"80"}, "2"=>{"4"=>"200"}}
   def update_exercise_weights(exercise_data)
-    exercise_data.each do |id, weight|
-      ex = Exercise.find id
-      ex.update_attribute :current_weight, weight
+    exercise_data.each do |ex_id, lift_details|
+      if lift_details.values.size == 1
+        ex = Exercise.find_by_id ex_id
+        ex.lift_details.each {|ld| ld.update_attribute :weight, lift_details.values.first }
+      else
+        lift_details.each do |ld_id, weight|
+          ld = LiftDetail.find_by_id ld_id
+          ld.update_attribute :weight, weight
+        end
+      end
     end
   end
 

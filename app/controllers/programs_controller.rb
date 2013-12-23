@@ -55,21 +55,10 @@ class ProgramsController < ApplicationController
     @program = Program.find(params[:id])
   end
 
-  # def initial_params
-  #   { name: params[:program][:name],
-  #     user_id: params[:program][:user_id],
-  #     available_in_store: params[:program][:available_in_store],
-  #     skill_level: params[:program][:skill_level],
-  #     description: params[:program][:description]
-  #   }
-  # end
-
   def program_params
     params.require(:program).permit(
       :name,
       :user_id,
-      :workout_ids,
-      :active,
       :available_in_store,
       :skill_level,
       :description,
@@ -91,10 +80,16 @@ class ProgramsController < ApplicationController
   helper_method :skill_levels
 
   def require_exercise_weights
-    if params[:exercises].values.any? {|weight| weight.blank?}
-      flash[:error] = "Every exercise must have a numeric weight value"
+    if weight_values.any? {|weight| weight.blank?}
+      flash[:error] = "Every exercise must have a weight value present"
       redirect_to current_weight_metrics_program_path(@program)
       return
+    end
+  end
+
+  def weight_values
+    params[:exercises].values.inject([]) do |weight_values, lift_details|
+      weight_values += lift_details.values; weight_values
     end
   end
 

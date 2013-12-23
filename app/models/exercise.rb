@@ -35,11 +35,11 @@ class Exercise < ActiveRecord::Base
     end
   end
 
-  private
-
   def static_sets?
     static?(:reps) && static?(:weight)
   end
+
+  private
 
   def static?(attribute)
     fields = lift_details.map(&attribute)
