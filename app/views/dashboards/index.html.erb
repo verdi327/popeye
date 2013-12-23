@@ -1,7 +1,15 @@
 <% if @active_program %>
-  <h2>Time To Crush</h2>
+  <h2>Let's Get To Work</h2>
+
   <h3 class="active-program"><%= @active_program.name %>:</h3>
-  <%= link_to "#{@current_workout.name}<span class='icon-chevron-right icon-large cw-icon'></span>".html_safe, new_workout_result_path(workout_id: @current_workout.id, program_id: @active_program.id, user_id: current_user.id), class: "btn btn-default btn-lg btn-block current-workout" %>
+  <% if @active_program.retest_max_lifts? && !completed_test_already? %>
+    <%= link_to "Max Lift Test Day!<span class='icon-chevron-right icon-large cw-icon'></span>".html_safe, retest_user_max_lifts_path(current_user), class: "btn btn-default btn-lg btn-block current-workout" %>
+
+    <h4 class="retest-complete">Completed the Retest Already?</h4>
+    <%= link_to "Move On To Next Workout", dashboard_path(current_user, test_completed: true), class: "btn btn-primary btn-lg btn-block" %>
+  <% else %>
+    <%= link_to "#{@current_workout.name}<span class='icon-chevron-right icon-large cw-icon'></span>".html_safe, new_workout_result_path(workout_id: @current_workout.id, program_id: @active_program.id), class: "btn btn-default btn-lg btn-block current-workout" %>
+  <% end %>
 <% else %>
   <h4><b>No Active Programs Found</b></h4>
   <p>Being consistent in your workout regimine is all about inertia.  The best way to keep your inertia is by following a program.</p>
@@ -13,7 +21,7 @@
     <%= link_to "To The Store", store_path, class: "btn btn-default btn-lg btn-block" %>
     <%= link_to "To My Workout library", workouts_path, class: "btn btn-default btn-lg btn-block" %>
   <% elsif !current_user.no_workouts? %>
-    <p>So, you got some options</p>
+    <p>So, you've got some options</p>
     <div class="list-group">
       <%= link_to "Pick a program from the store", store_path, class: "btn btn-default btn-lg btn-block" %>
       <%= link_to "Create your own program", new_program_path, class: "btn btn-default btn-lg btn-block" %>

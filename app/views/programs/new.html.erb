@@ -21,8 +21,12 @@
       <ul id="program-list" class="list-group drop-true placeholder">
         <li class="placeholder-text">Add Workouts Here</li>
       </ul>
+
+      <p>Retest max lifts after every <%= f.number_field :retest_frequency %> completed workouts?</p>
+
       <%= f.check_box :active %>
       <%= f.label :active, "Set this program as active?" %></br>
+
       <% if current_user.approved_trainer? %>
         <%= f.check_box :available_in_store %>
         <%= f.label :available_in_store, "Make available in store?" %></br>

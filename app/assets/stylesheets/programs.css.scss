@@ -11,7 +11,11 @@
 }
 
 .workout-title{padding:20px}
-.new_program .alert{margin-top:20px}
+.new_program{
+  .alert{margin-top:20px};
+  p {margin-bottom: 15px}
+}
+
 .active{
   float:right;
   margin-top:-11px
@@ -39,3 +43,5 @@
     margin-bottom:10px
   }
 }
+
+#program_retest_frequency {width:60px}

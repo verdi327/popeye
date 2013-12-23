@@ -3,9 +3,9 @@ class StrengthCalculator
 
   def initialize(user)
     @user        = user
-    @bench_press = user.max_lifts.where(exercise_name: "squat").first
-    @squat       = user.max_lifts.where(exercise_name: "bench press").first
-    @deadlift    = user.max_lifts.where(exercise_name: "deadlift").first
+    @bench_press = user.max_lifts.where(exercise_name: "bench press").order(created_at: :desc).first
+    @squat       = user.max_lifts.where(exercise_name: "squat").order(created_at: :desc).first
+    @deadlift    = user.max_lifts.where(exercise_name: "deadlift").order(created_at: :desc).first
   end
 
   def bench_press_ratio

@@ -1,10 +1,13 @@
 class Program < ActiveRecord::Base
   has_many :program_workouts, dependent: :destroy
   has_many :workouts, through: :program_workouts
+  has_many :workout_results
   belongs_to :user
   validates :name, presence: {message: "a program name is required"}, length: {maximum: 30, message: "program name is too long"}
   validates :description, presence: {message: "a program description is required"}, length: {maximum: 500, message: "description can only be a max of 500 characters"}, if: "available_in_store.present?"
   validates :skill_level, presence: {message: "a skill level is required"}, if: "available_in_store.present?"
+  validates :retest_frequency, presence: {message: "retest frequency is required" }, numericality: { greater_than_or_equal_to: 1, message: "only positive whole numbers" }
+
 
   scope :available_in_store, Proc.new { where(available_in_store: true) }
   scope :beginner_programs, Proc.new { available_in_store.where(skill_level: "beginner") }
@@ -59,11 +62,17 @@ class Program < ActiveRecord::Base
     workouts.map {|workout| workout.exercises}.flatten
   end
 
+  #FIXME exercises don't know of their weight anymore, only lift_details
   def update_exercise_weights(exercise_data)
     exercise_data.each do |id, weight|
       ex = Exercise.find id
       ex.update_attribute :current_weight, weight
     end
+  end
+
+  def retest_max_lifts?
+    completed_workouts = workout_results.size
+    completed_workouts % retest_frequency == 0
   end
 
   private

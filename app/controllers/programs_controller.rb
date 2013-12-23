@@ -13,7 +13,7 @@ class ProgramsController < ApplicationController
 
   def create
     @workouts = current_user.workouts
-    @program = Program.new(initial_params)
+    @program = Program.new(program_params)
     if @program.save
       @program.link_workouts(workout_ids)
       @program.set_workout_order(workout_ids)
@@ -55,14 +55,14 @@ class ProgramsController < ApplicationController
     @program = Program.find(params[:id])
   end
 
-  def initial_params
-    { name: params[:program][:name],
-      user_id: params[:program][:user_id],
-      available_in_store: params[:program][:available_in_store],
-      skill_level: params[:program][:skill_level],
-      description: params[:program][:description]
-    }
-  end
+  # def initial_params
+  #   { name: params[:program][:name],
+  #     user_id: params[:program][:user_id],
+  #     available_in_store: params[:program][:available_in_store],
+  #     skill_level: params[:program][:skill_level],
+  #     description: params[:program][:description]
+  #   }
+  # end
 
   def program_params
     params.require(:program).permit(
@@ -72,7 +72,8 @@ class ProgramsController < ApplicationController
       :active,
       :available_in_store,
       :skill_level,
-      :description
+      :description,
+      :retest_frequency
     )
   end
 

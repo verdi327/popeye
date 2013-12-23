@@ -44,3 +44,34 @@
 .add-weight{margin-top:15px; font-size:16px}
 .gender-text{margin-left:5px; font-size:16px}
 .welcome-text{font-size:14px}
+
+
+// learn more web page
+.learn-more-header h1{font-size:70px; font-weight:500; margin-bottom:40px}
+.reason{
+  margin-top:20px;
+  margin-bottom:30px;
+  p {padding:24px; background:rgb(242,242,242); font-size:17px}
+}
+
+.learn-more-signup{
+  h1 {text-align:center};
+  border:3px solid #6bb85c;
+  padding:20px;
+  margin-bottom:30px
+}
+// end learn more page
+
+
+// learn more mobile page
+.learn-more-header.mobile h1{font-size:29px; font-weight:500; margin-bottom:28px}
+.reason.mobile{
+  h2 {font-size:20px};
+  margin-top:20px;
+  margin-bottom:30px;
+  p {padding:24px; background:rgb(242,242,242); font-size:15px}
+}
+
+.learn-more-signup.mobile h1{font-size:28px}
+
+// end learn more page mobile

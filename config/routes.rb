@@ -10,6 +10,7 @@ Popeye::Application.routes.draw do
     end
   end
   root 'home#show'
+  get "learn_more" => "home#learn_more"
   get "workout_log" => "workout_results#index", as: :workout_log
   get "store" => "stores#index", as: :store
   get "users/:user_id/dashboard" => "dashboards#index", as: :dashboard
