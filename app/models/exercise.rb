@@ -17,7 +17,7 @@ class Exercise < ActiveRecord::Base
     if static_sets?
       "#{lift_details.size}x#{lift_details.first.reps}@#{lift_details.first.weight}"
     else
-      lift_details.sort{|ld| ld.set}.map do |detail|
+      lift_details.by_set.map do |detail|
         ["#{detail.reps}@#{detail.weight}"]
       end.join(" | ")
     end

@@ -82,6 +82,7 @@ class Program < ActiveRecord::Base
 
   def retest_max_lifts?
     completed_workouts = workout_results.size
+    return false if completed_workouts == 0
     completed_workouts % retest_frequency == 0
   end
 

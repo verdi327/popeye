@@ -56,6 +56,7 @@ class WorkoutResultsController < ApplicationController
       :program_id,
       :user_id,
       :workout_name,
+      :program_name,
       exercise_results_attributes:
       [
         :id,

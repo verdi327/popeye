@@ -23,4 +23,5 @@ module WorkoutResultsHelper
   def display_lift(lift_result)
     "<b>Set #{lift_result.set}</b> - #{lift_result.achieved_reps} @ #{lift_result.used_weight}lbs"
   end
+
 end

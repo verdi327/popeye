@@ -3,6 +3,7 @@
   <%= workout_form.hidden_field :program_id, value: @workout_result.program_id %>
   <%= workout_form.hidden_field :user_id, value: current_user.id %>
   <%= workout_form.hidden_field :workout_name, value: @exercises.first.workout.name %>
+  <%= workout_form.hidden_field :program_name, value: @workout_result.try(:program).try(:name) %>
   <% @exercises.each_with_index do |exercise, e_index| %>
     <div class="panel panel-default">
       <div class="panel-heading">

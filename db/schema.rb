@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131222182615) do
+ActiveRecord::Schema.define(version: 20131223202919) do
 
   create_table "exercise_results", force: true do |t|
     t.integer  "workout_result_id"
@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(version: 20131222182615) do
     t.integer  "program_id"
     t.integer  "user_id"
     t.string   "workout_name"
+    t.string   "program_name"
   end
 
   add_index "workout_results", ["program_id"], name: "index_workout_results_on_program_id", using: :btree

@@ -21,18 +21,13 @@
 
 // index page table
 
-.workout-result-summary-data-index{
-  .name-and-date{
-    width:50%;
-    float:left;
-    .date{margin-top:-24px}
-  }
-  .result-status-button{
-    width:37%;
-    margin-right:5px;
-    margin-top:10px;
-    float:right;
-    .btn{width:100%}
+.workout-results{
+  .list-group-item{
+    height:75px;
+    color:black;
+    .left{float:left}
+    h4 {margin-top:2px; margin-bottom:2px; padding-top:5px}
+    .view-result{float:right; color: #7a62d3; padding-top:20px}
   }
 }
 

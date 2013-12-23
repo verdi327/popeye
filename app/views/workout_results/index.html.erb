@@ -10,26 +10,21 @@
   </div>
   <% end %>
 
-  <div class="table-responsive">
-    <table class="table">
-      <tbody>
-        <% @workout_results.each do |result| %>
-        <tr>
-          <td>
-            <div class="workout-result-summary-data-index">
-              <div class="name-and-date">
-                <p><b><%= result.workout.name.titleize %></b></p>
-                <p class="date"><%= formatted_date(result) %></p>
-              </div>
-              <div class="result-status-button">
-              <%= link_to "View", workout_result_path(result), class: "btn btn-default"%>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+  <div class="list-group workout-results">
+    <% @workout_results.each do |result| %>
+      <a href="<%= workout_result_path(result) %>" class="list-group-item">
+        <div class="left">
+          <h4 class="list-group-item-header">
+            <%= result.workout_name.titleize %>
+          </h4>
+          <p class="list-group-item-text">
+            <%= formatted_date(result) %>
+          </p>
+        </div>
+        <span class='icon-chevron-right view-result'></span>
+      </a>
+    <% end %>
   </div>
+
 </div>
 <%= paginate @workout_results %>
