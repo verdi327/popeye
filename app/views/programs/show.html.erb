@@ -8,6 +8,9 @@
     </h1>
   </div>
   <div class="panel-body">
+    <% if @program.description.present? %>
+      <div class="description"><%= @program.description.html_safe %></div>
+    <% end %>
     <%= render partial: "exercise_details", locals: {program: @program} %>
   </div>
 </div>

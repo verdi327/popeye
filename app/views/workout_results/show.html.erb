@@ -1,6 +1,9 @@
 <div class="workout-result-summary-data-show">
   <div class="name-and-date">
-    <p><b><%= @workout_result.workout_name.titleize %></b></p>
+    <% if @workout_result.program_name.present? %>
+      <p><b><%= @workout_result.program_name.titleize %></b></p>
+    <% end %>
+    <p><%= @workout_result.workout_name.titleize %></p>
     <p class="date"><%= formatted_date(@workout_result) %></p>
   </div>
 </div>
@@ -8,7 +11,7 @@
 <% @workout_result.exercise_results.each do |exercise_result| %>
   <div class="panel panel-default">
     <div class="panel-heading">
-      <%= exercise_result.exercise_name %>
+      <b><%= exercise_result.exercise_name %></b>
       <span class="right">
         <%= link_to status_icon(exercise_result).html_safe, "#", class: "btn #{button_styling(exercise_result)}" %>
       </span>

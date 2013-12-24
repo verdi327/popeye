@@ -2,11 +2,11 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h1 class="panel-title">
-      <%= @program.name %>
+      <b><%= @program.name.titleize %></b>
     </h1>
   </div>
   <div class="panel-body">
-    <div class="description"><%= @program.description %></div>
+    <div class="description"><%= @program.description.html_safe %></div>
     <%= render partial: "programs/exercise_details", locals: {program: @program} %>
   </div>
 </div>
