@@ -1,11 +1,50 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h1 class="panel-title">New Workout</h1>
+<%= form_for @workout do |f| %>
+  <% if @workout.errors.any? %>
+    <div class="alert alert-danger alert-custom">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>oh snap! found found some errors</strong>
+      <ul>
+      <% @workout.errors.messages.each do |attr, msg| %>
+        <li><%= msg.first %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="panel panel-default new-workout">
+    <div class="panel-heading">
+      <h1 class="panel-title">
+        <%= f.text_field :name, placeholder: "Add A Workout Name", class: "form-control" %>
+      </h1>
+    </div>
+    <div class="panel-body">
+      <ul id="workout-list" class="list-group drop-true-workout placeholder">
+        <li class="placeholder-text">Add Exercises Here</li>
+      </ul>
+    </div>
+  </div>
+  <%= f.hidden_field :exercise_ids, value: "" %>
+  <%= f.hidden_field :creator_id, value: current_user.id %>
+<% end %>
+
+<div class="panel panel-default all-exercises">
+  <div class="panel-heading exercise-title">
+    <h1 class="panel-title">
+      <b>All Available Exercises</b>
+    </h1>
   </div>
   <div class="panel-body">
-    <%= render "form" %>
+    <ul id="exercise-list" class="list-group drop-true-workout">
+    <% @exercises.each do |exercise| %>
+      <li class="list-group-item" data-id="<%= exercise.id %>">
+        <%= exercise.name %>
+      </li>
+    <% end %>
+    </ul>
   </div>
 </div>
+
+<div style="clear:both"></div>
 
 <div class="form-action">
   <%= link_to "<span class='icon-bolt'></span> Create Workout".html_safe, "#", class: "btn btn-default btn-lg btn-block", id: "new-workout-submit" %>

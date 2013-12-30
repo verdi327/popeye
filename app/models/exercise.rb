@@ -1,9 +1,10 @@
 class Exercise < ActiveRecord::Base
-  belongs_to :workout
+  has_many :exercise_workouts, dependent: :destroy
+  has_many :workouts, through: :exercise_workouts
   has_many :lift_details, dependent: :destroy
   accepts_nested_attributes_for :lift_details, allow_destroy: true
 
-  validates :name, presence: {message: "an exercise name is required" }
+  validates :name, presence: {message: "an exercise name is required" }, uniqueness: {case_sensitive: false, message: "an exercise already exists with that name", on: :create}
   validates :increase_weight_by, presence: {message: "a weight to increase by is required" }, numericality: { greater_than_or_equal_to: 0, message: "only positive whole numbers" }
   validates :decrease_weight_by, presence: {message: "a weight to decrease by is required" }, numericality: { greater_than_or_equal_to: 0, message: "only positive whole numbers" }
   validates :increase_strategy, presence: {message: "a frequency for how often to increase the weight by is required" }, numericality: { greater_than_or_equal_to: 0, message: "only positive whole numbers"}

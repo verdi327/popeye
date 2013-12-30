@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  $( "ul.list-group.drop-true" ).sortable({
+  $( "ul.list-group.drop-true-program" ).sortable({
     connectWith: "ul",
     dropOnEmpty: true,
     receive: managePlaceholder

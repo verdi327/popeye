@@ -1,0 +1,34 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title"><b>Exercise Library</b></h1>
+  </div>
+
+  <% if @exercises.empty? %>
+  <div class="no-exercises">
+    <h4>No Exercises?</h4>
+    <p>get started by clicking the create button below</p>
+  </div>
+  <% end %>
+
+  <div class="list-group exercise-list">
+    <% @exercises.each do |exercise| %>
+      <a href="<%= edit_exercise_path(exercise) %>" class="list-group-item">
+        <div class="left">
+          <h4 class="list-group-item-header">
+            <%= exercise.name.titleize %>
+          </h4>
+          <p class="list-group-item-text">
+            <%= exercise.routine %>
+          </p>
+        </div>
+        <span class='icon-chevron-right view-exercise'></span>
+      </a>
+    <% end %>
+  </div>
+</div>
+
+<% unless mobile_device? %>
+  <div class="form-action">
+    <%= link_to "<span class='icon-bolt'></span> Create Exercise".html_safe, new_exercise_path, class: "btn btn-default btn-lg btn-block" %>
+  </div>
+<% end %>

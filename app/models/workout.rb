@@ -1,6 +1,6 @@
 class Workout < ActiveRecord::Base
-  has_many :exercises, dependent: :destroy
-  accepts_nested_attributes_for :exercises, allow_destroy: true
+  has_many :exercise_workouts, dependent: :destroy
+  has_many :exercises, through: :exercise_workouts
   has_many :workout_results
 
   #this callback needs to come before the dependent destroy for program_workouts, otherwise the
@@ -20,6 +20,14 @@ class Workout < ActiveRecord::Base
 
   def total_attempts
     WorkoutResult.where(workout_id: id).size
+  end
+
+  def link_exercises(exercise_ids)
+    unless exercise_ids.blank?
+      exercise_ids.each do |exercise_id|
+        ExerciseWorkout.create(workout_id: id, exercise_id: exercise_id)
+      end
+    end
   end
 
   private

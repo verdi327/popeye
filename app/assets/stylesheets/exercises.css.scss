@@ -1,0 +1,47 @@
+$color-light-grey: rgb(242,242,242);
+
+.edit_exercise,
+#new_exercise{
+  fieldset{background: $color-light-grey; padding:15px}
+}
+
+#update-exercise-submit,
+#new-exercise-submit{margin-top:25px}
+
+// new exercise workout form
+.nested-fields{padding:15px}
+
+.alert.alert-danger{
+  ul{
+    list-style-type: none;
+    margin-left: -39px;
+  }
+}
+
+.exercise-name {width:40%; float:left}
+
+.on-success{width:40%; float:left; border:1px solid black; padding-left:30px; padding-right:30px; padding-bottom:18px}
+.on-failure{width:40%; float:right; border:1px solid black; padding-left:30px; padding-right:30px; padding-bottom:18px}
+
+// end
+
+.add-lift-detail{float:right}
+// lift detail form
+.small-input-field {width:60px}
+.align-lift-details {margin-left: 5px; margin-right:5px}
+.lift-detail-group {margin-top:-10px; width:34%; float:left; margin-left:-14px}
+.remove-lift-detail {width:8%; margin-top:-12px; float:left; & a {color:#d22d5f}}
+// end
+
+// exercise index page
+.exercise-list{
+  .list-group-item{
+    height:75px;
+    color:black;
+    .left{float:left}
+    h4 {margin-top:2px; margin-bottom:2px; padding-top:5px}
+    .view-exercise{float:right; color: #7a62d3; padding-top:20px}
+  }
+}
+// end
+

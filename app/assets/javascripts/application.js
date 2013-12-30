@@ -24,6 +24,26 @@
 $(document).ready(function() {
   $('#simple-menu').sidr();
 
-  // $(".alert-custom").fadeOut(6000);
-  // $(".notice-custom").fadeOut(6000);
+  if(errorsPresent()){highlightErrors()};
+
+  function highlightErrors(){
+    $("form .form-group").each(function(){
+      if ( missingValue( $(this) ) ){
+        addErrorClass( $(this) );
+      }
+    });
+  }
+
+  function missingValue(formElement){
+    var field_value = formElement.children().filter(":input").val();
+    return field_value == null || field_value == ""
+  }
+
+  function addErrorClass(formElement){
+    formElement.addClass("has-error")
+  }
+
+  function errorsPresent(){
+    return $(".alert.alert-danger").length > 0
+  }
 });

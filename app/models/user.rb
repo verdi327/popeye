@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :workouts, foreign_key: "creator_id"
   has_many :workout_results
   has_many :max_lifts
+  has_many :exercises, foreign_key: "creator_id"
 
   def active_program
     programs.where(active: true).first

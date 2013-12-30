@@ -29,6 +29,7 @@ class ExerciseResult < ActiveRecord::Base
   private
 
   def manage_exercise_current_weight
+    reset_to_previous! if already_modified?
     if increase_weight_strategy_met?
       update_column :status, "increased"
       exercise.increase_weight
@@ -39,6 +40,17 @@ class ExerciseResult < ActiveRecord::Base
       update_column :status, "no_change"
     end
     update_column :next_lift, exercise.reload.routine
+  end
+
+  def already_modified?
+    status != nil
+  end
+
+  def reset_to_previous!
+    case status
+    when "increased" then exercise.decrease_weight
+    when "decreased" then exercise.increase_weight
+    end
   end
 
 end

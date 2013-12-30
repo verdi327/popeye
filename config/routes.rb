@@ -21,11 +21,7 @@ Popeye::Application.routes.draw do
     end
   end
   resources :workout_results
-  resources :exercises do
-    collection do
-      get "display_specific_attributes"
-    end
-  end
+  resources :exercises
   resources :programs do
     member do
       post "make_active"

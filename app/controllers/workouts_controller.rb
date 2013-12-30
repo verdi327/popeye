@@ -7,8 +7,7 @@ class WorkoutsController < ApplicationController
 
   def new
     @workout = Workout.new
-    exercises = @workout.exercises.build
-    exercises.lift_details.build
+    @exercises = current_user.exercises
   end
 
   def show
@@ -26,8 +25,10 @@ class WorkoutsController < ApplicationController
   end
 
   def create
+    @exercises = current_user.exercises
     @workout = Workout.new(workout_params)
     if @workout.save
+      @workout.link_exercises(exercise_ids)
       flash[:notice] = "Workout Created!"
       redirect_to workouts_path
     else
@@ -53,22 +54,12 @@ class WorkoutsController < ApplicationController
   def workout_params
     params.require(:workout).permit(
       :name,
-      :creator_id,
-      exercises_attributes:
-      [
-        :id,
-        :name,
-        :increase_weight_by,
-        :decrease_weight_by,
-        :increase_strategy,
-        :decrease_strategy,
-        :_destroy,
-        lift_details_attributes:
-        [
-          :id, :set, :reps, :weight, :_destroy
-        ]
-      ]
+      :creator_id
     )
+  end
+
+  def exercise_ids
+    params[:workout][:exercise_ids].split("_")
   end
 
   def workout_used_in_programs?

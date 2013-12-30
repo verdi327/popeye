@@ -1,18 +1,20 @@
 <%= form_for @workout_result do |workout_form| %>
-  <% @workout_result.exercise_results.each_with_index do |ex_result, ex_index| %>
+  <%= workout_form.fields_for :exercise_results do |exercise_result_form| %>
+
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h4><b><%= ex_result.exercise_name %></b><h4>
-        <p><%= ex_result.prescribed_lift %></p>
+        <h4><b><%= exercise_result_form.object.exercise_name %></b><h4>
+        <p><%= exercise_result_form.object.prescribed_lift %></p>
       </div>
-      <%= workout_form.fields_for :exercise_results do |exercise_result_form| %>
+
         <p class="panel-body">
           <%= exercise_result_form.fields_for :lift_results do |lift_result_form| %>
             <%= lift_result_form.hidden_field :achieved_reps, value: lift_result_form.object.achieved_reps %>
             <%= link_to "#{lift_result_form.object.achieved_reps}", "#rep-amount", class: "btn btn-default result-field", data:{reps: lift_result_form.object.goal_reps, :"edit-id" => lift_result_form.object_name} %>
           <% end %>
         </p>
-      <% end %>
     </div>
   <% end %>
+
+
 <% end %>

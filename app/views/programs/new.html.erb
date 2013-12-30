@@ -18,7 +18,7 @@
       </h1>
     </div>
     <div class="panel-body">
-      <ul id="program-list" class="list-group drop-true placeholder">
+      <ul id="program-list" class="list-group drop-true-program placeholder">
         <li class="placeholder-text">Add Workouts Here</li>
       </ul>
 
@@ -50,7 +50,7 @@
     </h1>
   </div>
   <div class="panel-body">
-    <ul id="workout-list" class="list-group drop-true">
+    <ul id="workout-list" class="list-group drop-true-program">
     <% @workouts.each do |workout| %>
       <li class="list-group-item workout" data-id="<%= workout.id %>">
         <%= workout.name %>

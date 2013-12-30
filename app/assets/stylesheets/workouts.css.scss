@@ -16,46 +16,7 @@ $color-light-grey: rgb(242,242,242);
   span.right { float:right; }
 }
 
-.remove-exercise,
-.add-lift-detail,
-#add-exercise{
-  float:right;
-}
-
-// lift detail form
-.small-input-field {width:60px}
-.align-lift-details {margin-left: 5px; margin-right:5px}
-.lift-detail-group {margin-top:-10px; width:34%; float:left; margin-left:-14px}
-.remove-lift-detail {width:8%; margin-top:-12px; float:left; & a {color:#d22d5f}}
-// end of lift detail form
-
 .badge{float:right}
-
-// new exercise workout form
-.nested-fields{
-  background-color:$color-light-grey;
-  padding:15px;
-}
-
-.alert.alert-danger{
-  ul{
-    list-style-type: none;
-    margin-left: -39px;
-  }
-}
-
-.exercise-name {width:40%; float:left}
-.remove-exercise-wrapper {float:right; padding-top:30px}
-
-.on-success{width:40%; float:left; border:1px solid black; padding-left:30px; padding-right:30px; padding-bottom:18px}
-.on-failure{width:40%; float:right; border:1px solid black; padding-left:30px; padding-right:30px; padding-bottom:18px}
-
-.edit_workout,
-#new_workout{
-  fieldset.exercise-group{border-bottom:1px solid black; padding-bottom:30px}
-}
-
-// end of exercise form
 
 .form-action{
   margin-bottom:10px
@@ -64,10 +25,6 @@ $color-light-grey: rgb(242,242,242);
 .no-workouts{
   margin-left:15px
 }
-
-// span for previewing ascending / descending
-span.descending,
-span.ascending{margin-left:10px}
 
 .current-workout{
   text-align:left;
@@ -83,5 +40,15 @@ span.ascending{margin-left:10px}
 .view{width:60px}
 .info-text{font-size:16px}
 
+// new workout form
+.new-workout{float:left;width:47%;}
+.all-exercises{float:right; width:47%}
+.placeholder-text{margin-left:10px}
+
+#workout-list,
+#exercise-list{padding:10px}
+
+.exercise-title{padding:20px}
+// end
 
 
