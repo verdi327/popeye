@@ -5,6 +5,7 @@ class MaxLiftsController < ApplicationController
   end
 
   def create
+    current_user.update_attribute :weight, params[:weight]
     MaxLift.record(params[:max_lifts], current_user)
     redirect_to summary_user_max_lifts_path(current_user)
   end
@@ -14,6 +15,10 @@ class MaxLiftsController < ApplicationController
   end
 
   def retest
+    @edit = true
+    @bench_press = current_user.max_lifts.where(exercise_name: "bench press").order(created_at: :desc).first.weight
+    @squat       = current_user.max_lifts.where(exercise_name: "squat").order(created_at: :desc).first.weight
+    @deadlift    = current_user.max_lifts.where(exercise_name: "deadlift").order(created_at: :desc).first.weight
   end
 
   private
@@ -26,8 +31,12 @@ class MaxLiftsController < ApplicationController
     end
 
     if weights_invalid?
-      flash[:error] = "a weight is required - only whole positive numbers"
-      redirect_to new_user_max_lift_path(current_user)
+      flash[:error] = "a weight is required for all lifts - only whole positive numbers"
+      if params[:edit].present?
+        redirect_to retest_user_max_lifts_path(current_user)
+      else
+        redirect_to new_user_max_lift_path(current_user)
+      end
       return
     end
   end

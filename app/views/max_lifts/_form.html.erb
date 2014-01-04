@@ -2,18 +2,26 @@
   <fieldset>
     <div class="form-group">
       <p><b>Squat</b></p>
-      <%= number_field_tag "[max_lifts][squat]", {}, class: "form-control" %>
+      <%= number_field_tag "[max_lifts][squat]", {}, placeholder: @squat, class: "form-control" %>
     </div>
 
     <div class="form-group">
       <p><b>Bench Press</b></p>
-      <%= number_field_tag "[max_lifts][bench press]", {}, class: "form-control" %>
+      <%= number_field_tag "[max_lifts][bench press]", {}, placeholder: @bench_press, class: "form-control" %>
     </div>
 
     <div class="form-group">
       <p><b>Deadlift</b></p>
-      <%= number_field_tag "[max_lifts][deadlift]", {}, class: "form-control" %>
+      <%= number_field_tag "[max_lifts][deadlift]", {}, placeholder: @deadlift, class: "form-control" %>
     </div>
+
+    <% if @edit %>
+    <div class="form-group">
+      <p><b>Current Weight</b></p>
+      <%= number_field_tag :weight, {}, placeholder: current_user.weight, class: "form-control" %>
+    </div>
+    <%= hidden_field_tag :edit, true %>
+    <% end %>
   </fieldset>
 
   <div class="form-action">
