@@ -12,12 +12,6 @@ class Workout < ActiveRecord::Base
   belongs_to :user
   validates :name, presence: {message: "a workout name is required"}, length: {maximum: 30, message: "workout name too long"}
 
-  #used for copying over associations when a program is copied
-  amoeba do
-    enable
-    include_field :exercises
-  end
-
   def exercises
     ex_workout_ids = exercise_workouts.map(&:exercise_id)
     ex_workout_ids.map {|id| Exercise.where(id: id)}.flatten

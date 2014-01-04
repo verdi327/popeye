@@ -48,14 +48,10 @@ class Program < ActiveRecord::Base
   end
 
   def copy_to_user(user)
-    copied_workout_ids = workouts.map do |workout|
-      copy = workout.amoeba_dup
-      copy.save
-      copy.id
-    end
-    program_copy = create_program_copy(user, copied_workout_ids)
-    link_workouts(copied_workout_ids, program_copy.id)
-    program_copy.set_as_active
+    program_copy = create_program_copy(user)
+    workout_to_copy_mapping = create_workout_copies(program_copy)
+    exercise_to_copy_mapping = create_exercise_copies(workout_to_copy_mapping)
+    copy_lift_details(exercise_to_copy_mapping)
   end
 
   def exercises
@@ -89,18 +85,65 @@ class Program < ActiveRecord::Base
   private
 
   def active_already_exists?
-    self.class.where(user_id: user_id).where(active: true).size > 0
+    self.class.where(creator_id: creator_id).where(active: true).size > 0
   end
 
   def currently_active
-    self.class.where(user_id: user_id).where(active: true).first
+    self.class.where(creator_id: creator_id).where(active: true).first
   end
 
-  def create_program_copy(user, copied_workout_ids)
+  def create_program_copy(user)
     program_copy = dup
     program_copy.save
-    program_copy.update_attributes(creator_id: user.id, workout_order: copied_workout_ids, current_workout: copied_workout_ids.first)
+    program_copy.update_attribute :creator_id, user.id
     program_copy
   end
+
+  def create_workout_copies(program_copy)
+    workout_to_copy_mapping = {}
+    workout_copies = workouts.map do |workout|
+      copy = workout.dup
+      copy.save
+      workout_to_copy_mapping[workout.id] = copy.id
+      copy
+    end
+    copied_workout_ids = workout_copies.map(&:id)
+    program_copy.update_attributes(workout_order: copied_workout_ids, current_workout: copied_workout_ids.first )
+    link_workouts(copied_workout_ids, program_copy.id)
+    workout_to_copy_mapping
+  end
+
+  def create_exercise_copies(workout_to_copy_mapping)
+    exercise_to_copy_mapping = {}
+    workout_to_copy_mapping.each do |original, copy|
+      original = Workout.find_by_id original
+      copied_exercise_ids = original.exercises.map do |exercise|
+        ex_copy = exercise.dup
+        ex_copy.save
+        exercise_to_copy_mapping[exercise.id] = ex_copy.id
+        ex_copy.id
+      end
+      link_exercises(copied_exercise_ids, copy)
+    end
+    exercise_to_copy_mapping
+  end
+
+  def copy_lift_details(exercise_to_copy_mapping)
+    exercise_to_copy_mapping.each do |original, copy|
+      original = Exercise.find_by_id original
+      original.lift_details.each do |detail|
+        ld_copy = detail.dup
+        ld_copy.save
+        ld_copy.update_attribute :exercise_id, copy
+      end
+    end
+  end
+
+  def link_exercises(copied_exercise_ids, workout_copy_id)
+    copied_exercise_ids.each do |exercise_id|
+      ExerciseWorkout.create(exercise_id: exercise_id, workout_id: workout_copy_id)
+    end
+  end
+
 end
 

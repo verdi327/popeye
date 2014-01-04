@@ -10,10 +10,6 @@ class Exercise < ActiveRecord::Base
   validates :increase_strategy, presence: {message: "a frequency for how often to increase the weight by is required" }, numericality: { greater_than_or_equal_to: 0, message: "only positive whole numbers"}
   validates :decrease_strategy, presence: {message: "a frequency for how often to decrease the weight by is required" }, numericality: { greater_than_or_equal_to: 0, message: "only positive whole numbers" }
 
-  amoeba do
-    enable
-  end
-
   def routine
     if static_sets?
       "#{lift_details.size}x#{lift_details.first.reps}@#{lift_details.first.weight}"

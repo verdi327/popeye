@@ -17,8 +17,6 @@ gem 'rails_12factor', group: :production
 #General Use
 gem "faraday"
 gem "kaminari"
-gem "amoeba"
-
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
