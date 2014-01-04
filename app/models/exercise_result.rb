@@ -6,6 +6,10 @@ class ExerciseResult < ActiveRecord::Base
 
   after_save :manage_exercise_current_weight
 
+  def self.by_completion
+    order(created_at: :asc)
+  end
+
   def success?
     lift_results.all? {|lift_result| lift_result.was_successful == true}
   end

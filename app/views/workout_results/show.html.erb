@@ -8,10 +8,10 @@
   </div>
 </div>
 
-<% @workout_result.exercise_results.each do |exercise_result| %>
+<% @workout_result.exercise_results.by_completion.each do |exercise_result| %>
   <div class="panel panel-default">
     <div class="panel-heading">
-      <b><%= exercise_result.exercise_name %></b>
+      <span class="title-text"><b><%= exercise_result.exercise_name.titleize %></b></span>
       <span class="right">
         <%= link_to status_icon(exercise_result).html_safe, "#", class: "btn #{button_styling(exercise_result)}" %>
       </span>

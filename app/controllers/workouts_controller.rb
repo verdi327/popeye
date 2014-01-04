@@ -1,5 +1,5 @@
 class WorkoutsController < ApplicationController
-  before_action :find_workout, only: [:show, :edit, :update, :destroy, :confirm_delete]
+  before_action :find_workout, only: [:show, :destroy, :confirm_delete]
 
   def index
     @workouts = current_user.workouts
@@ -11,17 +11,6 @@ class WorkoutsController < ApplicationController
   end
 
   def show
-  end
-
-  def edit
-  end
-
-  def update
-    if @workout.update(workout_params)
-      redirect_to workouts_path
-    else
-      render "edit"
-    end
   end
 
   def create

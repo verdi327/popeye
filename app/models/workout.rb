@@ -1,6 +1,6 @@
 class Workout < ActiveRecord::Base
   has_many :exercise_workouts, dependent: :destroy
-  has_many :exercises, through: :exercise_workouts
+  # has_many :exercises, through: :exercise_workouts
   has_many :workout_results
 
   #this callback needs to come before the dependent destroy for program_workouts, otherwise the
@@ -16,6 +16,11 @@ class Workout < ActiveRecord::Base
   amoeba do
     enable
     include_field :exercises
+  end
+
+  def exercises
+    ex_workout_ids = exercise_workouts.map(&:exercise_id)
+    ex_workout_ids.map {|id| Exercise.where(id: id)}.flatten
   end
 
   def total_attempts
