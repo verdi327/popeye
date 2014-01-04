@@ -46,4 +46,7 @@ $(document).ready(function() {
   function errorsPresent(){
     return $(".alert.alert-danger").length > 0
   }
+
 });
+
+
