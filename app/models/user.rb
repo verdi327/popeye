@@ -4,11 +4,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :programs, foreign_key: "creator_id"
-  has_many :workouts, foreign_key: "creator_id"
+  has_many :programs
+  has_many :workouts
   has_many :workout_results
   has_many :max_lifts
-  has_many :exercises, foreign_key: "creator_id"
+  has_many :exercises
 
   def active_program
     programs.where(active: true).first

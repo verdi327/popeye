@@ -41,7 +41,7 @@ class ExercisesController < ApplicationController
       :decrease_weight_by,
       :increase_strategy,
       :decrease_strategy,
-      :creator_id,
+      :user_id,
       lift_details_attributes:
       [
         :id, :set, :reps, :weight, :_destroy

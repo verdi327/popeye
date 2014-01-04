@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140104152758) do
+ActiveRecord::Schema.define(version: 20140104231051) do
 
   create_table "exercise_results", force: true do |t|
     t.integer  "workout_result_id"
@@ -41,10 +41,10 @@ ActiveRecord::Schema.define(version: 20140104152758) do
     t.integer  "decrease_strategy"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "creator_id"
+    t.integer  "user_id"
   end
 
-  add_index "exercises", ["creator_id"], name: "index_exercises_on_creator_id", using: :btree
+  add_index "exercises", ["user_id"], name: "index_exercises_on_user_id", using: :btree
 
   create_table "lift_details", force: true do |t|
     t.integer  "set"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20140104152758) do
     t.text     "description"
     t.string   "skill_level"
     t.integer  "retest_frequency"
+    t.integer  "user_id"
   end
 
   create_table "users", force: true do |t|
@@ -141,7 +142,7 @@ ActiveRecord::Schema.define(version: 20140104152758) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "creator_id"
+    t.integer  "user_id"
   end
 
 end

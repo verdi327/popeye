@@ -85,17 +85,17 @@ class Program < ActiveRecord::Base
   private
 
   def active_already_exists?
-    self.class.where(creator_id: creator_id).where(active: true).size > 0
+    self.class.where(user_id: user_id).where(active: true).size > 0
   end
 
   def currently_active
-    self.class.where(creator_id: creator_id).where(active: true).first
+    self.class.where(user_id: user_id).where(active: true).first
   end
 
   def create_program_copy(user)
     program_copy = dup
     program_copy.save
-    program_copy.update_attribute :creator_id, user.id
+    program_copy.update_attributes(user_id: user.id, creator_id: creator_id)
     program_copy
   end
 
