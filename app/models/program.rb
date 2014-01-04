@@ -99,7 +99,7 @@ class Program < ActiveRecord::Base
   def create_program_copy(user, copied_workout_ids)
     program_copy = dup
     program_copy.save
-    program_copy.update_attributes(user_id: user.id, workout_order: copied_workout_ids, current_workout: copied_workout_ids.first)
+    program_copy.update_attributes(creator_id: user.id, workout_order: copied_workout_ids, current_workout: copied_workout_ids.first)
     program_copy
   end
 end

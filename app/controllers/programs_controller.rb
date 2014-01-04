@@ -58,7 +58,7 @@ class ProgramsController < ApplicationController
   def program_params
     params.require(:program).permit(
       :name,
-      :user_id,
+      :creator_id,
       :available_in_store,
       :skill_level,
       :description,

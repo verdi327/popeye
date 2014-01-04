@@ -5,7 +5,7 @@ class MaxLiftsController < ApplicationController
   end
 
   def create
-    current_user.update_attribute :weight, params[:weight]
+    current_user.update_attribute(:weight, params[:weight]) if params[:weight]
     MaxLift.record(params[:max_lifts], current_user)
     redirect_to summary_user_max_lifts_path(current_user)
   end

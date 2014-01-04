@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :programs
+  has_many :programs, foreign_key: "creator_id"
   has_many :workouts, foreign_key: "creator_id"
   has_many :workout_results
   has_many :max_lifts
