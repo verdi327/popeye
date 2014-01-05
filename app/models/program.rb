@@ -103,6 +103,7 @@ class Program < ActiveRecord::Base
     workout_to_copy_mapping = {}
     workout_copies = workouts.map do |workout|
       copy = workout.dup
+      copy.user_id = program_copy.user_id
       copy.save
       workout_to_copy_mapping[workout.id] = copy.id
       copy
@@ -115,26 +116,32 @@ class Program < ActiveRecord::Base
 
   def create_exercise_copies(workout_to_copy_mapping)
     exercise_to_copy_mapping = {}
-    workout_to_copy_mapping.each do |original, copy|
-      original = Workout.find_by_id original
+    workout_to_copy_mapping.each do |original_id, copy_id|
+      original = Workout.find_by_id original_id
+      copy = Workout.find_by_id copy_id
       copied_exercise_ids = original.exercises.map do |exercise|
-        ex_copy = exercise.dup
-        ex_copy.save
-        exercise_to_copy_mapping[exercise.id] = ex_copy.id
-        ex_copy.id
+        if exercise_to_copy_mapping[exercise.id]
+          exercise_to_copy_mapping[exercise.id]
+        else
+          ex_copy = exercise.dup
+          ex_copy.user_id = copy.user_id
+          ex_copy.save
+          exercise_to_copy_mapping[exercise.id] = ex_copy.id
+          ex_copy.id
+        end
       end
-      link_exercises(copied_exercise_ids, copy)
+      link_exercises(copied_exercise_ids, copy_id)
     end
     exercise_to_copy_mapping
   end
 
   def copy_lift_details(exercise_to_copy_mapping)
-    exercise_to_copy_mapping.each do |original, copy|
-      original = Exercise.find_by_id original
+    exercise_to_copy_mapping.each do |original_id, copy_id|
+      original = Exercise.find_by_id original_id
       original.lift_details.each do |detail|
         ld_copy = detail.dup
         ld_copy.save
-        ld_copy.update_attribute :exercise_id, copy
+        ld_copy.update_attribute :exercise_id, copy_id
       end
     end
   end

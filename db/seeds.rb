@@ -11,6 +11,7 @@ puts "destroying all duplicate records"
 Exercise.destroy_all
 Workout.destroy_all
 Program.destroy_all
+LiftDetail.destroy_all
 
 # user
 # will already be created id: 1
@@ -18,13 +19,13 @@ user = User.find_by_email "god@popeye.com"
 
 # exercises
 puts "creating the exercise records"
-squat = Exercise.create(name: "Squat", increase_weight_by: 5, decrease_weight_by: 15, increase_strategy: 1, decrease_strategy: 3, creator_id: user.id )
-press = Exercise.create(name: "Press", increase_weight_by: 5, decrease_weight_by: 10, increase_strategy: 1, decrease_strategy: 3, creator_id: user.id )
-deadlift = Exercise.create(name: "Deadlift", increase_weight_by: 10, decrease_weight_by: 20, increase_strategy: 1, decrease_strategy: 3, creator_id: user.id )
-bench_press = Exercise.create(name: "Bench Press", increase_weight_by: 5, decrease_weight_by: 10, increase_strategy: 1, decrease_strategy: 3, creator_id: user.id )
-power_clean = Exercise.create(name: "Power Clean", increase_weight_by: 5, decrease_weight_by: 10, increase_strategy: 1, decrease_strategy: 3, creator_id: user.id )
-pull_ups = Exercise.create(name: "Pull Ups", increase_weight_by: 5, decrease_weight_by: 5, increase_strategy: 1, decrease_strategy: 1, creator_id: user.id )
-back_ext = Exercise.create(name: "Back Extensions", increase_weight_by: 5, decrease_weight_by: 10, increase_strategy: 2, decrease_strategy: 3, creator_id: user.id )
+squat = Exercise.create(name: "Squat", increase_weight_by: 5, decrease_weight_by: 15, increase_strategy: 1, decrease_strategy: 3, user_id: user.id )
+press = Exercise.create(name: "Press", increase_weight_by: 5, decrease_weight_by: 10, increase_strategy: 1, decrease_strategy: 3, user_id: user.id )
+deadlift = Exercise.create(name: "Deadlift", increase_weight_by: 10, decrease_weight_by: 20, increase_strategy: 1, decrease_strategy: 3, user_id: user.id )
+bench_press = Exercise.create(name: "Bench Press", increase_weight_by: 5, decrease_weight_by: 10, increase_strategy: 1, decrease_strategy: 3, user_id: user.id )
+power_clean = Exercise.create(name: "Power Clean", increase_weight_by: 5, decrease_weight_by: 10, increase_strategy: 1, decrease_strategy: 3, user_id: user.id )
+pull_ups = Exercise.create(name: "Pull Ups", increase_weight_by: 5, decrease_weight_by: 5, increase_strategy: 1, decrease_strategy: 1, user_id: user.id )
+back_ext = Exercise.create(name: "Back Extensions", increase_weight_by: 5, decrease_weight_by: 10, increase_strategy: 2, decrease_strategy: 3, user_id: user.id )
 
 #lift details
 puts "creating the associated lift details"
@@ -54,10 +55,10 @@ end
 
 puts "creating the workouts"
 # workouts
-a = Workout.create(name: "Workout A", creator_id: user.id)
-b = Workout.create(name: "Workout B", creator_id: user.id)
-c = Workout.create(name: "Workout C", creator_id: user.id)
-d = Workout.create(name: "Workout D", creator_id: user.id)
+a = Workout.create(name: "Workout A", user_id: user.id)
+b = Workout.create(name: "Workout B", user_id: user.id)
+c = Workout.create(name: "Workout C", user_id: user.id)
+d = Workout.create(name: "Workout D", user_id: user.id)
 
 #ExerciseWorkouts - link workouts with exercises
 puts "linking the exercise and workouts"
@@ -101,6 +102,7 @@ ss = Program.create(
   workout_order: [a.id, b.id, c.id, d.id],
   current_workout: a.id,
   active: true,
+  user_id: user.id,
   creator_id: user.id,
   available_in_store: true,
   skill_level: "beginner",
