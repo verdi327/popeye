@@ -28,7 +28,9 @@ class Exercise < ActiveRecord::Base
 
   def decrease_weight
     lift_details.each do |detail|
-      detail.update_attribute :weight, (detail.weight - decrease_weight_by)
+      unless detail.weight == 0
+        detail.update_attribute :weight, (detail.weight - decrease_weight_by)
+      end
     end
   end
 

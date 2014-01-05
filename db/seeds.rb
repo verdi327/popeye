@@ -16,8 +16,14 @@ LiftDetail.destroy_all
 # user
 # will already be created id: 1
 user = User.find_by_email "god@popeyeapp.com"
-
-puts "trying out the new nifty factory"
-
+puts "creating the beginner starting strength program"
 StorePrograms::StartingStrengthFactory.new(user).create
+
+puts "creating the intermediate Frankie NY Mass Builder Program"
+StorePrograms::FrankieNyFactory.new(user).create
+
+puts "creating the advanced 20 Rep Power Squat Program"
+StorePrograms::SquatAttackFactory.new(user).create
+
+puts "All done :)"
 

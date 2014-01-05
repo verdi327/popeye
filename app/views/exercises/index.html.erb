@@ -6,7 +6,11 @@
   <% if @exercises.empty? %>
   <div class="no-exercises">
     <h4>No Exercises?</h4>
-    <p>get started by clicking the create button below</p>
+    <% if mobile_device? %>
+      <p>head over to the store to select a program that fits your needs</p>
+    <% else %>
+      <p>get started by clicking the create button below</p>
+    <% end %>
   </div>
   <% end %>
 

@@ -4,8 +4,8 @@
   These programs are designed for experience lifters with 2+ years training under their belt. These programs focus on a higher degree of muscle specialization.
 </h4>
 
-<div class="list-group">
+<div class="list-group" id="advanced-programs">
   <% @programs.each do |program| %>
-    <%= link_to program.name.titleize, program_path(program), class: "list-group-item" %>
+    <%= link_to program.name.titleize, program_path(program, store_view: true), class: "list-group-item" %>
   <% end %>
 </div>
