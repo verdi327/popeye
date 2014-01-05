@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+  <div class="panel-heading workout-title">
+    <h1 class="panel-title">
+      <b><%= @program.name %></b>
+    </h1>
+  </div>
+  <div class="panel-body">
+    <% if @program.description.present? %>
+      <div class="description"><%= @program.description.html_safe %></div>
+    <% end %>
+    <%= render partial: "exercise_details", locals: {program: @program} %>
+  </div>
+</div>
+
+<div class="form-action">
+  <%= link_to "<span class='icon-rocket'></span> Start Program".html_safe, copy_to_user_stores_path(program_id: @program.id), method: "post", class: "btn btn-default btn-lg btn-block" %>
+</div>

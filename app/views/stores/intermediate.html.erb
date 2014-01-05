@@ -1,2 +1,12 @@
-<h3>No Intermediate Programs Yet</h3>
+<h3>Keep The Gains Coming</h3>
+
+<h4>
+  These programs are designed for lifters who have already maximized their results following a linear progression program
+</h4>
+
+<div class="list-group" id="intermediate-programs">
+  <% @programs.each do |program| %>
+    <%= link_to program.name.titleize, program_path(program, store_view: true), class: "list-group-item" %>
+  <% end %>
+</div>
 

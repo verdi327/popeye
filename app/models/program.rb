@@ -52,6 +52,7 @@ class Program < ActiveRecord::Base
     workout_to_copy_mapping = create_workout_copies(program_copy)
     exercise_to_copy_mapping = create_exercise_copies(workout_to_copy_mapping)
     copy_lift_details(exercise_to_copy_mapping)
+    program_copy.set_as_active
   end
 
   def exercises
@@ -82,6 +83,16 @@ class Program < ActiveRecord::Base
     completed_workouts % retest_frequency == 0
   end
 
+  def destroy_with_workouts_and_exercises
+    workouts.each do |workout|
+      workout.exercises.each do |exercise|
+        exercise.destroy
+      end
+      workout.destroy
+    end
+    destroy
+  end
+
   private
 
   def active_already_exists?
@@ -103,7 +114,7 @@ class Program < ActiveRecord::Base
     workout_to_copy_mapping = {}
     workout_copies = workouts.map do |workout|
       copy = workout.dup
-      copy.user_id = program_copy.user_id
+      copy.update_attributes(user_id: program_copy.user_id, cloned_from_program: name)
       copy.save
       workout_to_copy_mapping[workout.id] = copy.id
       copy
@@ -124,7 +135,7 @@ class Program < ActiveRecord::Base
           exercise_to_copy_mapping[exercise.id]
         else
           ex_copy = exercise.dup
-          ex_copy.user_id = copy.user_id
+          ex_copy.update_attributes(user_id: copy.user_id, cloned_from_program: original.cloned_from_program)
           ex_copy.save
           exercise_to_copy_mapping[exercise.id] = ex_copy.id
           ex_copy.id

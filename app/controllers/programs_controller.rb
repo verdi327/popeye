@@ -25,13 +25,17 @@ class ProgramsController < ApplicationController
   end
 
   def show
-    if params[:new_from_store]
-      flash[:notice] = "Before you begin make sure to set your proper starting weight by clicking 'View Exercise Weight' below"
+    if params[:store_view]
+      render :store_view
+    else
+      if params[:new_from_store]
+        flash[:notice] = "Before you begin make sure to set your proper starting weight by clicking 'View Exercise Weight' below"
+      end
     end
   end
 
   def destroy
-    @program.destroy
+    @program.destroy_with_workouts_and_exercises
     redirect_to programs_path
   end
 
