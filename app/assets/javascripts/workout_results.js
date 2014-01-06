@@ -17,11 +17,13 @@ $(document).ready(function() {
     api.audio.play();
   }
 
-  $(".container").on("click", "#new-workout-result-submit", function(){
+  $(".container").one("click", "#new-workout-result-submit", function(){
+    $("#new-workout-result-submit").attr('disabled','disabled');
     $('form').submit();
   })
 
-  $(".container").on("click", "#update-workout-result-submit", function(){
+  $(".container").one("click", "#update-workout-result-submit", function(){
+    $("#update-workout-result-submit").attr('disabled','disabled');
     $("form").submit();
   })
 

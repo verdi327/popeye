@@ -10,16 +10,28 @@
   height:75px
 }
 
-.workout-title{padding:20px}
+.workout-title{
+  padding:20px;
+  height:75px;
+  .active{
+    width:25%;
+    float:right;
+    margin-top:-5px;
+    max-width:115px;
+    .btn-success{width:100%};
+  }
+  .panel-title{
+    width:65%;
+    float:left;
+  }
+}
+
 .new_program{
   .alert{margin-top:20px};
   p {margin-bottom: 15px}
 }
 
-.active{
-  float:right;
-  margin-top:-11px
-}
+
 
 #workout-list{
   list-style-type:none;

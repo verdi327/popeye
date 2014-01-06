@@ -40,6 +40,7 @@ $(document).ready(function() {
     if(noWorkoutIds(workout_ids)){
       alert("Need to add at least 1 workout first!");
     } else{
+      $(this).attr('disabled','disabled');
       $("#program_workout_ids").val(workout_ids);
       $("form#new_program").submit();
     }

@@ -99,7 +99,7 @@ module StorePrograms
         name: "Starting Strength",
         workout_order: [@a.id, @b.id, @c.id, @d.id],
         current_workout: @a.id,
-        active: true,
+        active: false,
         user_id: user.id,
         creator_id: user.id,
         available_in_store: true,

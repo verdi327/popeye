@@ -19,7 +19,7 @@
           <%= exercise_result_form.fields_for :lift_results do |lift_result_form| %>
             <%= lift_result_form.hidden_field :set, value: detail.set %>
             <%= lift_result_form.hidden_field :goal_reps, value: detail.reps %>
-            <%= lift_result_form.hidden_field :achieved_reps, value: detail.reps %>
+            <%= lift_result_form.hidden_field :achieved_reps, value: 0 %>
             <%= lift_result_form.hidden_field :intended_weight, value: detail.weight %>
             <%= lift_result_form.hidden_field :used_weight, value: detail.weight %>
           <% end %>

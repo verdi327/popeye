@@ -87,7 +87,7 @@ module StorePrograms
         name: "20 Rep Power Squat",
         workout_order: [@squat_attack.id],
         current_workout: @squat_attack.id,
-        active: true,
+        active: false,
         user_id: user.id,
         creator_id: user.id,
         available_in_store: true,

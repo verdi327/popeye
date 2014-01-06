@@ -119,7 +119,7 @@ module StorePrograms
         name: "Frankie NY's Mass Builder",
         workout_order: [@pull_a.id, @push_a.id, @leg_a.id, @pull_b.id, @push_b.id, @leg_b.id],
         current_workout: @pull_a.id,
-        active: true,
+        active: false,
         user_id: user.id,
         creator_id: user.id,
         available_in_store: true,

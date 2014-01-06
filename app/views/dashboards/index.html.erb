@@ -12,7 +12,7 @@
   <% end %>
 <% else %>
   <h4><b>No Active Programs Found</b></h4>
-  <p>Being consistent in your workout regimine is all about inertia.  The best way to keep your inertia is by following a program.</p>
+  <p>Being consistent in your workout regimine is all about inertia.  The best way to keep your inertia is by following a program. If you already have created a program, make sure to mark it as active so you can start following it.</p>
   <% if current_user.no_workouts? %>
     <p>Head over to the store where you can find your next awesome program</p>
     <%= link_to "To The Store", store_path, class: "btn btn-default btn-lg btn-block" %>

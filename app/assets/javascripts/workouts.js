@@ -46,6 +46,7 @@ $(document).ready(function() {
     if(noExerciseIds(exercise_ids)){
       alert("Need to add at least 1 exercise first!");
     } else{
+      $(this).attr('disabled','disabled');
       $("#workout_exercise_ids").val(exercise_ids);
       $("form#new_workout").submit();
     }
