@@ -25,6 +25,10 @@
 </div>
 
 <div class="form-action">
+  <%= link_to "Start Workout", new_workout_result_path(workout_id: @workout.id, user_id: current_user.id), class: "btn btn-default btn-lg btn-block start-workout" %>
+</div>
+
+<div class="form-action">
   <%= link_to "<span class='icon-chevron-left'></span> Back".html_safe, workouts_path, class: "btn btn-default btn-lg btn-block" %>
 </div>
 

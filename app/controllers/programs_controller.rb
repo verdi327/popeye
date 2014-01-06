@@ -1,6 +1,7 @@
 class ProgramsController < ApplicationController
   before_action :find_program, only: [:show, :destroy, :make_active, :current_weight_metrics, :update_current_weight_metrics]
   before_action :require_exercise_weights, only: [:update_current_weight_metrics]
+  before_action :check_for_mobile
 
   def index
     @programs = current_user.programs

@@ -52,5 +52,9 @@ $(document).ready(function() {
     }
   });
   // end
+
+  $(".start-workout").one("click", function(){
+    $(this).attr('disabled','disabled');
+  });
 });
 

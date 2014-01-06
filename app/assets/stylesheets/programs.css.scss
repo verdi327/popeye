@@ -61,3 +61,34 @@
 // update current weight
 .exercise-weights{padding:15px; background:rgb(242,242,242); margin-bottom:15px}
 // end
+
+// program index page
+.program-list{
+  .list-group-item{
+    height:60px;
+    .label{margin-right:5px}
+    .left{float:left};
+    .list-group-item-header{color:black};
+    .right{float:right};
+    .view-program{float:right; margin-top:14px}
+  }
+}
+// end
+
+// TODO - consolidate similar css with mobile and web views
+// mobile index view
+.program-list-mobile{
+  .list-group-item{
+    height:75px;
+    .label{padding-top:-20px};
+    .left{float:left};
+    .list-group-item-header{color:black; margin-bottom:2px};
+    .right{float:right};
+    .view-program{float:right; margin-top:14px}
+  }
+}
+// end
+
+
+
+

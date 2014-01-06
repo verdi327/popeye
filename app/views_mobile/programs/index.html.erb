@@ -10,23 +10,20 @@
     </div>
   <% end %>
 
-  <div class="list-group program-list">
+  <div class="list-group program-list-mobile">
     <% @programs.each do |program| %>
       <a href="<%= program_path(program) %>" class="list-group-item">
         <div class="left">
           <h4 class="list-group-item-header">
-            <% if program.active %>
-              <span class="label label-success">active</span>
-            <% end %>
             <%= program.name.titleize %>
           </h4>
         </div>
         <span class='icon-chevron-right view-program'></span>
+        <div style="clear:both"></div>
+        <% if program.active %>
+          <span class="label label-success">active</span>
+        <% end %>
       </a>
     <% end %>
   </div>
-</div>
-
-<div class="form-action">
-  <%= link_to "<span class='icon-bolt'></span> Create Program".html_safe, new_program_path, class: "btn btn-default btn-lg btn-block" %>
 </div>
