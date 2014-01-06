@@ -34,4 +34,8 @@ class User < ActiveRecord::Base
   def has_completed_workouts?
     workout_results.present?
   end
+
+  def no_completed_workouts?
+    !has_completed_workouts?
+  end
 end

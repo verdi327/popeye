@@ -1,5 +1,6 @@
 class ExercisesController < ApplicationController
   before_action :find_exercise, only: [:edit, :update]
+  before_action :check_for_mobile
 
   def index
     @exercises = current_user.exercises

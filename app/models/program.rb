@@ -52,7 +52,6 @@ class Program < ActiveRecord::Base
     workout_to_copy_mapping = create_workout_copies(program_copy)
     exercise_to_copy_mapping = create_exercise_copies(workout_to_copy_mapping)
     copy_lift_details(exercise_to_copy_mapping)
-    program_copy.set_as_active
   end
 
   def exercises
@@ -67,11 +66,12 @@ class Program < ActiveRecord::Base
     exercise_data.each do |ex_id, lift_details|
       if lift_details.values.size == 1
         ex = Exercise.find_by_id ex_id
-        ex.lift_details.each {|ld| ld.update_attribute :weight, lift_details.values.first }
+        ex.lift_details.each {|ld| ld.weight = lift_details.values.first; ld.save }
       else
         lift_details.each do |ld_id, weight|
           ld = LiftDetail.find_by_id ld_id
-          ld.update_attribute :weight, weight
+          ld.weight = weight
+          ld.save
         end
       end
     end

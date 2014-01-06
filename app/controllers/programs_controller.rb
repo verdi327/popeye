@@ -85,8 +85,8 @@ class ProgramsController < ApplicationController
   helper_method :skill_levels
 
   def require_exercise_weights
-    if weight_values.any? {|weight| weight.blank?}
-      flash[:error] = "Every exercise must have a weight value present"
+    if weight_values.any? {|weight| weight.blank? || weight.to_i < 0}
+      flash[:error] = "Every exercise must have a positive weight value present"
       redirect_to current_weight_metrics_program_path(@program)
       return
     end

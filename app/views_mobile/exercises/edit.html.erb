@@ -1,0 +1,30 @@
+<div class="name-and-routine">
+  <h4><%= @exercise.name.titleize %></h4>
+  <p><%= @exercise.routine %></p>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <b>On Success</b>
+  </div>
+
+  <div class="panel-body">
+    <p>Increase weight by <b><%= @exercise.increase_weight_by %></b> lbs</p>
+    <p>After <b><%= @exercise.increase_strategy %></b> successful attempt(s)</p>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <b>On Failure</b>
+  </div>
+
+  <div class="panel-body">
+    <p>Decrease weight by <b><%= @exercise.decrease_weight_by %></b> lbs</p>
+    <p>After <b><%= @exercise.decrease_strategy %></b> failed attempt(s)</p>
+  </div>
+</div>
+
+<div class="form-action">
+  <%= link_to "<span class='icon-chevron-left'></span> Back".html_safe, exercises_path, class: "btn btn-primary btn-lg btn-block" %>
+</div>
