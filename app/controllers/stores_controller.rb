@@ -7,11 +7,11 @@ class StoresController < ApplicationController
   end
 
   def intermediate
-    @programs = Program.intermediate_programs
+    @programs = Program.intermediate_store_programs
   end
 
   def advanced
-    @programs = Program.advanced_programs
+    @programs = Program.advanced_store_programs
   end
 
   def copy_to_user
@@ -21,4 +21,5 @@ class StoresController < ApplicationController
     new_program.set_as_active
     redirect_to program_path(new_program, new_from_store: true)
   end
+
 end

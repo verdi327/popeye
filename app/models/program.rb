@@ -93,6 +93,14 @@ class Program < ActiveRecord::Base
     destroy
   end
 
+  def self.intermediate_store_programs
+    intermediate_programs.where(user_id: system_user.id)
+  end
+
+  def self.advanced_store_programs
+    advanced_programs.where(user_id: system_user.id)
+  end
+
   private
 
   def active_already_exists?
@@ -161,6 +169,10 @@ class Program < ActiveRecord::Base
     copied_exercise_ids.each do |exercise_id|
       ExerciseWorkout.create(exercise_id: exercise_id, workout_id: workout_copy_id)
     end
+  end
+
+  def self.system_user
+    @user ||= User.find_by_email "god@popeyeapp.com"
   end
 
 end
