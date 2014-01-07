@@ -2,6 +2,9 @@ class MaxLiftsController < ApplicationController
   before_action :validate_max_lifts, only: [:create]
 
   def new
+    @bench_press = StrengthEstimator.new(current_user).bench_press
+    @squat       = StrengthEstimator.new(current_user).squat
+    @deadlift    = StrengthEstimator.new(current_user).deadlift
   end
 
   def create

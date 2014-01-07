@@ -138,15 +138,15 @@ class StrengthCalculator
       "90th-95th"
     elsif squat_ratio >= 1.5
       "85th-90th"
-    elsif squat_ratio >= 1.0
+    elsif squat_ratio >= 1.25
       "80th-85th"
-    elsif squat_ratio >= 0.75
+    elsif squat_ratio >= 1.0
       "70th-80th"
-    elsif squat_ratio >= 0.5
+    elsif squat_ratio >= 0.75
       "50th-70th"
-    elsif squat_ratio >= 0.4
+    elsif squat_ratio >= 0.5
       "40th-50th"
-    elsif squat_ratio >= 0.3
+    elsif squat_ratio >= 0.4
       "30th-40th"
     else
       "0-30th"
@@ -160,15 +160,15 @@ class StrengthCalculator
       "90th-95th"
     elsif deadlift_ratio >= 1.5
       "85th-90th"
-    elsif deadlift_ratio >= 1.0
+    elsif deadlift_ratio >= 1.25
       "80th-85th"
-    elsif deadlift_ratio >= 0.75
+    elsif deadlift_ratio >= 1.0
       "70th-80th"
-    elsif deadlift_ratio >= 0.5
+    elsif deadlift_ratio >= 0.75
       "50th-70th"
-    elsif deadlift_ratio >= 0.4
+    elsif deadlift_ratio >= 0.5
       "40th-50th"
-    elsif deadlift_ratio >= 0.3
+    elsif deadlift_ratio >= 0.4
       "30th-40th"
     else
       "0-30th"
