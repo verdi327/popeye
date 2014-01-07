@@ -46,7 +46,7 @@ class MaxLiftsController < ApplicationController
 
   def weights_invalid?
     weights = params[:max_lifts].values
-    weights.any? {|weight| weight.blank? || weight.to_i < 0 }
+    weights.any? {|weight| weight.blank? || weight.to_i < 1 }
   end
 
   def valid_exercise_names?
